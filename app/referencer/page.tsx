@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { referencer, opgaveEksempler } from "@/content/referencer";
+import { referencer, opgaveEksempler, brancher } from "@/content/referencer";
 import { virksomhed } from "@/content/virksomhed";
 import { Broedkrumme } from "@/components/Broedkrumme";
 import { Afsloer } from "@/components/Sektion";
@@ -111,6 +111,34 @@ export default function ReferencerSide() {
               </Afsloer>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Brancher vi arbejder for */}
+      <section className="border-y border-linje bg-ink-2 py-20">
+        <div className="mx-auto max-w-7xl px-5 lg:px-8">
+          <Afsloer className="max-w-2xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-accent">
+              Brancher
+            </p>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-krom sm:text-4xl">
+              Vi arbejder på tværs af brancher
+            </h2>
+            <p className="mt-3 text-staal-lys">
+              Fra byggeri og detail til den offentlige sektor — vi tilpasser
+              løsningen til den enkelte branche og opgave.
+            </p>
+          </Afsloer>
+          <ul className="mt-10 flex flex-wrap gap-3">
+            {brancher.map((b) => (
+              <li
+                key={b}
+                className="dybde-3d rounded-full border border-linje bg-ink px-5 py-2.5 text-sm font-medium text-staal-lys"
+              >
+                {b}
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

@@ -97,6 +97,24 @@ export const opgaveEksempler: OpgaveEksempel[] = [
     beskrivelse:
       "Tryghedsskabende tilstedeværelse og rolig konflikthåndtering på et bosted i tæt samarbejde med stedets personale.",
   },
+  {
+    titel: "Portvagt på industrianlæg",
+    ydelse: "Portvagt",
+    beskrivelse:
+      "Adgangskontrol og registrering af køretøjer og leverandører ved indkørslen til et større industri- og lagerområde.",
+  },
+  {
+    titel: "Vagt ved koncert og festival",
+    ydelse: "Event",
+    beskrivelse:
+      "Bemanding, afspærring og tryghed ved et større arrangement — fra indgangskontrol til roligt overblik i publikumsområdet.",
+  },
+  {
+    titel: "Vagt på genbrugsplads",
+    ydelse: "Kommunevagt",
+    beskrivelse:
+      "Tilsyn og tryghed på en kommunal genbrugsplads — styring af adgang og hjælp til at holde ro og orden.",
+  },
 
   // ─────────────────────────────────────────────────────────────
   // TILFØJ FLERE EKSEMPLER HER:
@@ -107,4 +125,18 @@ export const opgaveEksempler: OpgaveEksempel[] = [
   //   ydelse: "Byggepladsvagt", // hvilken vagtform
   //   beskrivelse: "1-2 sætninger om opgaven (uden opdigtede tal eller kundenavne).",
   // },
+];
+
+// Brancher og sektorer vi løser opgaver for.
+export const brancher: string[] = [
+  "Bygge & anlæg",
+  "Entreprenører",
+  "Boligselskaber",
+  "Detail & varehuse",
+  "Offentlig sektor & kommuner",
+  "Bosteder & psykiatri",
+  "Events & arrangementer",
+  "Industri & lager",
+  "Foreninger & museer",
+  "Sikkerhedsbranchen (vikarservice)",
 ];
