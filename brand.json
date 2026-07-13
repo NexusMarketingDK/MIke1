@@ -1,0 +1,33 @@
+{
+  "navn": "MT Vagt & Vikarservice ApS",
+  "beskrivelse": "Brandfarver udledt fra MT Vagt-logoet (skjold med løve, MTV i rødt, sølv/stål wordmark på mat sort).",
+  "farver": {
+    "ink": {
+      "base": "#0B0F14",
+      "hævet": "#11161D",
+      "grafit": "#1A212B",
+      "linje": "#232C37"
+    },
+    "staal": {
+      "moerk": "#333A42",
+      "staal": "#5B636C",
+      "lys": "#9AA2AB",
+      "soelv": "#C9D0D6",
+      "krom": "#EEF1F4"
+    },
+    "accent": {
+      "roed": "#D42233",
+      "roedKlar": "#E5283A",
+      "roedDyb": "#9E1420"
+    },
+    "papir": {
+      "flade": "#F5F6F7",
+      "kant": "#E4E7EA",
+      "blaek": "#0B0F14"
+    }
+  },
+  "kilder": [
+    "Logo: mat sort baggrund, sølv/stål-gradient på skjold og MTvagt-wordmark, rød MTV og vinge-accenter, hvid SECURITY-tekst.",
+    "Designretning fra briefen: near-black base #0B0F14, stål-mellemtone, én højsynlig accent (logoets røde)."
+  ]
+}
