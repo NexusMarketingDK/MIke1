@@ -23,14 +23,21 @@ export const virksomhed = {
   },
   // E-mailen bygges i klienten af dele for at beskytte mod spam-robotter.
   emailDele: ["kontakt", "mtvagt.dk"],
-  region: "Trekantsområdet og Fyn",
-  base: "Middelfart på Fyn",
+  // Primært fokusområde (bruges i sætninger om nærområdet).
+  region: "trekantsområdet",
+  // Bredt dækningsområde: hele landet + Malmö, men med hovedfokus på trekantsområdet.
+  daekningBred: "hele Danmark og Malmö",
+  daekningSaetning:
+    "Vi har base i Middelfart og ekspertise i hele Danmark og Malmö — med hovedfokus på trekantsområdet.",
+  base: "Middelfart",
   daekning: [
     "Middelfart",
     "Fredericia",
     "Kolding",
     "Vejle",
     "Odense",
+    "Malmö",
+    "Hele Danmark",
   ],
   autorisation: {
     autoriseret: true,

@@ -45,7 +45,7 @@ export function Billede({
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-2xl border border-linje bg-ink-2",
+        "dybde-3d glans-3d relative overflow-hidden rounded-2xl border border-linje bg-ink-2",
         RATIOS[ratio],
         className
       )}

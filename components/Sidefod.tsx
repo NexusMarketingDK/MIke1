@@ -14,7 +14,8 @@ export function Sidefod() {
           <Logo className="h-10 w-auto" />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-staal-lys">
             {virksomhed.slogan}. Autoriseret vagtselskab med base i{" "}
-            {virksomhed.base}, der dækker hele {virksomhed.region}.
+            {virksomhed.base}, der dækker {virksomhed.daekningBred} — med hovedfokus
+            på {virksomhed.region}.
           </p>
         </div>
 

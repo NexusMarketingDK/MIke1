@@ -50,8 +50,8 @@ export default function OmSide() {
             <p className="mt-6 text-lg leading-relaxed text-staal-lys">
               {virksomhed.navn} er et autoriseret vagtselskab med base i{" "}
               {virksomhed.base}. Vi skaber tryghed for virksomheder,
-              entreprenører, boligselskaber og den offentlige sektor i hele{" "}
-              {virksomhed.region}.
+              entreprenører, boligselskaber og den offentlige sektor i{" "}
+              {virksomhed.daekningBred} — med hovedfokus på {virksomhed.region}.
             </p>
             <blockquote className="mt-8 border-l-2 border-accent pl-5 text-xl italic text-krom">
               {virksomhed.positionering}
@@ -109,7 +109,7 @@ export default function OmSide() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
               { k: "Base", v: virksomhed.base },
-              { k: "Dækning", v: virksomhed.region },
+              { k: "Dækning", v: "Hele Danmark og Malmö" },
               { k: "CVR", v: virksomhed.cvr },
               { k: "Medlemskab", v: "VSL · ISO-certificeret" },
             ].map((f) => (
@@ -128,7 +128,7 @@ export default function OmSide() {
       <SeoSektion
         overskrift="Et autoriseret vagtselskab med rod i trekantsområdet"
         afsnit={[
-          "MT Vagt & Vikarservice ApS er et autoriseret vagtselskab med base i Middelfart på Fyn. Vores mål er enkelt: at skabe tryghed for vores kunder ved at løse hver opgave efter høj standard. Vi dækker hele trekantsområdet – Fredericia, Kolding, Vejle og Odense – og hjælper både private virksomheder, entreprenører, boligselskaber, foreninger og den offentlige sektor.",
+          "MT Vagt & Vikarservice ApS er et autoriseret vagtselskab med base i Middelfart. Vores mål er enkelt: at skabe tryghed for vores kunder ved at løse hver opgave efter høj standard. Vi har ekspertise i hele Danmark og Malmö — med hovedfokus på trekantsområdet (Fredericia, Kolding, Vejle og Odense) — og hjælper både private virksomheder, entreprenører, boligselskaber, foreninger og den offentlige sektor.",
           "For os er autorisationen ikke en formalitet, men fundamentet under alt, hvad vi gør. Alt vores personale er vagtuddannet, sikkerhedsgodkendt af danske myndigheder og godkendt til at arbejde under vagtloven. Alle vagter bærer legitimationskort udstedt af Rigspolitiet, kan yde førstehjælp og betjene hjertestarter. Vi er ISO-certificeret og medlem af VSL. Et autoriseret vagtselskab er din garanti for, at opgaven ikke løses af amatører.",
           "Vi stræber ikke efter at blive de største i branchen. Til gengæld sætter vi en ære i at være tæt på vores kunder, kende vores område og løse opgaven ordentligt – hver gang. Døgnvagt, tillid og tryghed er ikke bare ord for os, men den måde vi arbejder på.",
         ]}

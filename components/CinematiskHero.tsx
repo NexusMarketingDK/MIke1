@@ -135,6 +135,7 @@ export function CinematiskHero() {
           <ul className="mt-12 flex flex-wrap gap-x-6 gap-y-3 text-sm text-staal-lys">
             {[
               "Autoriseret af myndighederne",
+              "Hele Danmark & Malmö",
               "ISO-certificeret",
               "Medlem af VSL",
               "Rigspolitiets legitimationskort",

@@ -124,3 +124,61 @@ h4,
     transition: none !important;
   }
 }
+
+/* =========================================================
+   3D / dybde-effekter (uden AI — ren CSS/SVG)
+   ========================================================= */
+
+/* Lagdelt dybdeskygge + subtil indvendig highlight → 3D-relief */
+.dybde-3d {
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.06),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+    0 2px 4px -2px rgba(0, 0, 0, 0.5),
+    0 18px 36px -18px rgba(0, 0, 0, 0.8),
+    0 30px 60px -30px rgba(0, 0, 0, 0.7);
+}
+
+/* Hover-tilt der giver kort/billeder et 3D-pop */
+.tilt-3d {
+  transform: perspective(1000px) rotateX(0) rotateY(0) translateY(0);
+  transform-style: preserve-3d;
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease;
+  will-change: transform;
+}
+.tilt-3d:hover {
+  transform: perspective(1000px) rotateX(5deg) translateY(-6px) scale(1.012);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+    0 8px 16px -8px rgba(0, 0, 0, 0.6),
+    0 44px 80px -32px rgba(0, 0, 0, 0.9),
+    0 0 0 1px rgba(212, 34, 51, 0.18);
+}
+
+/* Glans-strejf øverst (glass/3D) */
+.glans-3d {
+  position: relative;
+}
+.glans-3d::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(0, 0, 0, 0.18) 100%
+  );
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tilt-3d,
+  .tilt-3d:hover {
+    transform: none;
+    transition: none;
+  }
+}

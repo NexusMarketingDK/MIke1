@@ -26,11 +26,15 @@ export function DaekningsKort() {
             Dækningsområde
           </p>
           <h2 className="mt-4 text-4xl font-extrabold tracking-tight text-krom sm:text-5xl">
-            Hele trekantsområdet og Fyn
+            Ekspertise i hele Danmark og Malmö
           </h2>
           <p className="mt-4 text-lg text-staal-lys">
-            Fra vores base i Middelfart dækker vi hele trekantsområdet og Fyn med
-            hurtig respons — døgnet rundt. Vælg en by for at se, hvordan vi dækker.
+            Fra vores base i Middelfart løser vi vagtopgaver i hele Danmark og Malmö —
+            med hovedfokus på trekantsområdet, hvor vi rykker hurtigst ud, døgnet
+            rundt. Vælg en by for at se, hvordan vi dækker.
+          </p>
+          <p className="mt-3 text-sm text-staal">
+            Også opgaver i bl.a. København, Aarhus, Aalborg, Esbjerg og Malmö.
           </p>
           <ul className="mt-8 flex flex-wrap gap-2">
             {byer.map((b) => (
@@ -66,7 +70,7 @@ export function DaekningsKort() {
               viewBox="0 0 600 380"
               className="w-full"
               role="img"
-              aria-label="Kort over MT Vagts dækningsområde i trekantsområdet og på Fyn"
+              aria-label="Kort over MT Vagts kerneområde i trekantsområdet — vi dækker desuden hele Danmark og Malmö"
             >
               <defs>
                 <radialGradient id="hav" cx="50%" cy="40%">

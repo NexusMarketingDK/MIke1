@@ -23,10 +23,13 @@ export function localBusinessLd() {
     telephone: virksomhed.telefon.kald,
     vatID: `DK${virksomhed.cvr}`,
     taxID: virksomhed.cvr,
-    areaServed: virksomhed.daekning.map((by) => ({
-      "@type": "City",
-      name: by,
-    })),
+    areaServed: [
+      { "@type": "Country", name: "Danmark" },
+      { "@type": "City", name: "Malmö", address: { "@type": "PostalAddress", addressCountry: "SE" } },
+      ...virksomhed.daekning
+        .filter((by) => by !== "Malmö" && by !== "Hele Danmark")
+        .map((by) => ({ "@type": "City", name: by })),
+    ],
     address: {
       "@type": "PostalAddress",
       streetAddress: virksomhed.adresse.gade,

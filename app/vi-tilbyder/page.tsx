@@ -52,7 +52,7 @@ export default function YdelserOversigt() {
               <Afsloer as="article" key={y.slug} delay={(i % 3) * 0.05}>
                 <Link
                   href={`/vi-tilbyder/${y.slug}`}
-                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-linje bg-ink-2 transition-colors hover:border-staal"
+                  className="dybde-3d tilt-3d group flex h-full flex-col overflow-hidden rounded-2xl border border-linje bg-ink-2 hover:border-staal"
                 >
                   <Billede
                     navn={ind?.heroBillede ?? "hero-byggeplads-nat"}
@@ -91,7 +91,7 @@ export default function YdelserOversigt() {
         faq={[
           {
             spoergsmaal: "Hvilke områder dækker MT Vagt?",
-            svar: "Vi har base i Middelfart og dækker hele trekantsområdet og Fyn, herunder Fredericia, Kolding, Vejle og Odense.",
+            svar: "Vi har base i Middelfart og dækker hele Danmark og Malmö med hovedfokus på trekantsområdet, herunder Fredericia, Kolding, Vejle og Odense.",
           },
           {
             spoergsmaal: "Er MT Vagt et autoriseret vagtselskab?",

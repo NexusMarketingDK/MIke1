@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     template: "%s | MT Vagt",
   },
   description:
-    "MT Vagt & Vikarservice ApS er et autoriseret vagtselskab i Middelfart. Byggepladsvagt, runderingsvagt, portvagt og mere i hele trekantsområdet. Døgnvagt.",
+    "MT Vagt & Vikarservice ApS er et autoriseret vagtselskab i Middelfart med ekspertise i hele Danmark og Malmö — hovedfokus på trekantsområdet. Byggepladsvagt, runderingsvagt, portvagt og mere. Døgnvagt.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
