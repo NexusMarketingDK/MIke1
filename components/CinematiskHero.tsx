@@ -60,7 +60,7 @@ export function CinematiskHero() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[65%_center] opacity-70"
+          className="kenburns object-cover object-[65%_center] opacity-70"
         />
       )}
       {/* Amber floodlight-glød nederst til højre */}
