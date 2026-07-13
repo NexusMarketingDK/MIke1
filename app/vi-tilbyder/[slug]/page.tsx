@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ydelser, ydelseBySlug } from "@/content/ydelser";
 import { ydelseIndhold } from "@/content/ydelse-indhold";
+import { ydelseEkstraSeo } from "@/content/ydelse-seo";
 import { alleIndlaeg } from "@/content/blog";
 import { virksomhed } from "@/content/virksomhed";
 import { Billede } from "@/components/Billede";
@@ -54,6 +55,7 @@ export default async function YdelseSide({
     .map((s) => ydelseBySlug(s))
     .filter((x): x is NonNullable<typeof x> => Boolean(x));
 
+  const ekstraSeo = ydelseEkstraSeo[slug] ?? [];
   const blogAlle = alleIndlaeg();
   const relateretBlog = (ind?.relateretBlog ?? [])
     .map((s) => blogAlle.find((p) => p.slug === s))
@@ -140,6 +142,36 @@ export default async function YdelseSide({
           </div>
         </div>
       </section>
+
+      {/* To ekstra SEO-sektioner målrettet de hotteste emner pr. ydelse */}
+      {ekstraSeo.length > 0 && (
+        <section className="border-t border-linje bg-ink py-20">
+          <div className="mx-auto max-w-7xl px-5 lg:px-8">
+            <div className="grid gap-10 lg:grid-cols-2">
+              {ekstraSeo.map((blok, i) => (
+                <Afsloer
+                  as="article"
+                  key={blok.overskrift}
+                  delay={i * 0.08}
+                  className="dybde-3d rounded-3xl border border-linje bg-ink-2 p-8"
+                >
+                  <span className="text-sm font-semibold uppercase tracking-[0.2em] text-accent">
+                    {i === 0 ? "Aktuelt emne" : "Godt at vide"}
+                  </span>
+                  <h2 className="mt-3 text-2xl font-extrabold tracking-tight text-krom sm:text-3xl">
+                    {blok.overskrift}
+                  </h2>
+                  <div className="mt-5 space-y-4 leading-relaxed text-staal-lys">
+                    {blok.afsnit.map((p, j) => (
+                      <p key={j}>{p}</p>
+                    ))}
+                  </div>
+                </Afsloer>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Risiko-slider (kun byggepladsvagt) */}
       {ind?.visRisikoSlider && (
