@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+/* =========================================================
+   MT Vagt — designtokens
+   Udledt fra logoet: mat sort base, sølv/stål, rød accent.
+   ========================================================= */
+
+@theme {
+  /* Ink / mørke flader */
+  --color-ink: #0b0f14;
+  --color-ink-2: #11161d;
+  --color-grafit: #1a212b;
+  --color-linje: #232c37;
+
+  /* Stål / sølv-skala */
+  --color-staal-moerk: #333a42;
+  --color-staal: #5b636c;
+  --color-staal-lys: #9aa2ab;
+  --color-soelv: #c9d0d6;
+  --color-krom: #eef1f4;
+
+  /* Accent (logoets røde) */
+  --color-accent: #d42233;
+  --color-accent-klar: #e5283a;
+  --color-accent-dyb: #9e1420;
+
+  /* Lyse flader */
+  --color-papir: #f5f6f7;
+  --color-papir-kant: #e4e7ea;
+  --color-blaek: #0b0f14;
+
+  /* Skrifttyper (sat via next/font) */
+  --font-overskrift: var(--font-archivo), "Archivo", system-ui, sans-serif;
+  --font-brød: var(--font-inter), "Inter", system-ui, sans-serif;
+
+  /* Container */
+  --spacing-hairline: 1px;
+}
+
+:root {
+  --baggrund: var(--color-ink);
+  --forgrund: var(--color-krom);
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--baggrund);
+  color: var(--forgrund);
+  font-family: var(--font-brød);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Overskrifter — stærk grotesk, stram tracking */
+h1,
+h2,
+h3,
+h4,
+.overskrift {
+  font-family: var(--font-overskrift);
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  line-height: 1.02;
+}
+
+/* Fokus-tilstand med accentfarve (a11y) */
+:where(a, button, input, select, textarea):focus-visible {
+  outline: 2px solid var(--color-accent-klar);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* Fin 1px kornstruktur som subtil tekstur-overlay */
+.kornstruktur {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+/* Tynde hairline-gitterlinjer */
+.gitter {
+  background-image: linear-gradient(
+      to right,
+      color-mix(in srgb, var(--color-linje) 60%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--color-linje) 60%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 88px 88px;
+}
+
+@keyframes puls-radius {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .respekter-reduceret {
+    animation: none !important;
+    transition: none !important;
+  }
+}
