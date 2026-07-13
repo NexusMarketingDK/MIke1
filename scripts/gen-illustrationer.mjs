@@ -296,82 +296,189 @@ const scener = {
     return svgRamme(W, H, `
       <defs>
         <linearGradient id="nat3" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#0a1626"/><stop offset="1" stop-color="#0a0e13"/>
+          <stop offset="0" stop-color="#081422"/>
+          <stop offset="0.6" stop-color="#0c1a2a"/>
+          <stop offset="1" stop-color="#0a0e13"/>
         </linearGradient>
+        <radialGradient id="flood3" cx="50%" cy="50%" r="50%">
+          <stop offset="0" stop-color="#ffd08a" stop-opacity="0.9"/>
+          <stop offset="1" stop-color="#ffb85c" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="kegle3" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#ffe4b0" stop-opacity="0.5"/>
+          <stop offset="1" stop-color="#ffe4b0" stop-opacity="0"/>
+        </linearGradient>
+        <filter id="slør3"><feGaussianBlur stdDeviation="6"/></filter>
       </defs>
       <rect width="${W}" height="${H}" fill="url(#nat3)"/>
-      ${projektoer(W * 0.85, jord, H * 0.3, -1)}
-      <g fill="#0b1017">
-        ${[...Array(3)].map((_, i) => `
-          <g transform="translate(${W * 0.12 + i * W * 0.28},${jord - 130 - (i % 2) * 40})">
-            <rect width="${W * 0.22}" height="130" fill="#10161e"/>
-            ${[...Array(4)].map((_, r) => `<line x1="0" y1="${r * 34 + 16}" x2="${W * 0.22}" y2="${r * 34 + 16}" stroke="#1c242e" stroke-width="5"/>`).join("")}
-            <rect y="130" width="${W * 0.22}" height="14" fill="#171207"/>
-            ${[...Array(5)].map((_, p) => `<rect x="${p * W * 0.05}" y="130" width="${W * 0.02}" height="14" fill="#241c0c"/>`).join("")}
-          </g>`).join("")}
+      <!-- måne -->
+      <circle cx="${W * 0.8}" cy="${H * 0.12}" r="${W * 0.16}" fill="#3a6a86" opacity="0.16" filter="url(#slør3)"/>
+      <circle cx="${W * 0.8}" cy="${H * 0.12}" r="${W * 0.05}" fill="#dbeaf3" opacity="0.85"/>
+      ${[...Array(40)].map((_, i) => `<circle cx="${(i * 191) % W}" cy="${(i * 97) % (H * 0.4)}" r="${i % 8 === 0 ? 1.8 : 0.7}" fill="#cfe0ee" opacity="${0.1 + (i % 5) * 0.08}"/>`).join("")}
+
+      <!-- projektørmaster med lyskegler -->
+      ${projektoer(W * 0.85, jord, H * 0.34, -1)}
+      ${projektoer(W * 0.12, jord, H * 0.26, 1)}
+      <polygon points="${W * 0.85},${jord - H * 0.34} ${W * 0.55},${jord} ${W * 1.05},${jord}" fill="url(#kegle3)" opacity="0.4"/>
+      <circle cx="${W * 0.85}" cy="${jord - H * 0.34 - 6}" r="${W * 0.14}" fill="url(#flood3)" opacity="0.5"/>
+      <circle cx="${W * 0.12}" cy="${jord - H * 0.26 - 6}" r="${W * 0.1}" fill="url(#flood3)" opacity="0.4"/>
+
+      <!-- oplagret materiel: reoler + paller med varmt toplys -->
+      <g>
+        ${[...Array(3)].map((_, i) => {
+          const gy = jord - 150 - (i % 2) * 46;
+          return `
+          <g transform="translate(${W * 0.1 + i * W * 0.29},${gy})">
+            <rect width="${W * 0.23}" height="150" fill="#0f1720"/>
+            <rect width="${W * 0.23}" height="10" fill="#3a2f1a"/>
+            <rect width="${W * 0.23}" height="4" fill="#7a6033" opacity="0.7"/>
+            ${[...Array(4)].map((_, r) => `<line x1="0" y1="${r * 38 + 20}" x2="${W * 0.23}" y2="${r * 38 + 20}" stroke="#20303f" stroke-width="6"/>`).join("")}
+            <!-- rør/materialer -->
+            ${[...Array(6)].map((_, p) => `<rect x="${p * W * 0.037 + 4}" y="150" width="${W * 0.03}" height="18" fill="${p % 2 ? "#2a2110" : "#1c2530"}"/>`).join("")}
+          </g>`;
+        }).join("")}
       </g>
+
+      <!-- våd jord med refleksion -->
       <rect y="${jord}" width="${W}" height="${H - jord}" fill="#05080c"/>
-      ${lygte({ x: W * 0.2, y: jord - 190, vinkel: 8, laengde: W * 0.6, bredde: 170, id: "b3" })}
-      ${hegn(0, jord - H * 0.3, W, H * 0.3, 0.75)}
+      <rect x="${W * 0.7}" y="${jord}" width="${W * 0.14}" height="${H - jord}" fill="#ffb85c" opacity="0.08"/>
+
+      <!-- hegn i forgrunden -->
+      ${hegn(0, jord - H * 0.28, W, H * 0.28, 0.8)}
+      <!-- vagt med lygte -->
+      ${lygte({ x: W * 0.3, y: jord - 30, vinkel: 10, laengde: W * 0.5, bredde: 150, id: "b3" })}
+      ${vagt({ x: W * 0.3, y: jord - 40, s: 1.0 })}
+      <ellipse cx="${W * 0.3}" cy="${jord + 14}" rx="38" ry="7" fill="#000" opacity="0.5"/>
       ${vignet(0.6)}${korn(0.06)}
     `);
   },
 
-  // 4) Event-vagt (aften)
+  // 4) Event-vagt — aften ved et arrangement med scenelys og publikum
   "event-vagt": (W, H) => {
     const jord = H * 0.82;
     return svgRamme(W, H, `
       <defs>
-        <linearGradient id="aften" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#0d1522"/><stop offset="1" stop-color="#121016"/>
+        <linearGradient id="aften4" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#0b1020"/>
+          <stop offset="0.6" stop-color="#1a1630"/>
+          <stop offset="1" stop-color="#140f1c"/>
         </linearGradient>
-        <filter id="soft"><feGaussianBlur stdDeviation="6"/></filter>
+        <linearGradient id="straale4" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#ffd9a0" stop-opacity="0.5"/>
+          <stop offset="1" stop-color="#ffd9a0" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="straaleR" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#ff5a6a" stop-opacity="0.4"/>
+          <stop offset="1" stop-color="#ff5a6a" stop-opacity="0"/>
+        </linearGradient>
+        <filter id="soft4"><feGaussianBlur stdDeviation="7"/></filter>
       </defs>
-      <rect width="${W}" height="${H}" fill="url(#aften)"/>
-      <path d="M0,${H * 0.3} Q${W * 0.5},${H * 0.42} ${W},${H * 0.28}" stroke="#3a3f4a" stroke-width="2" fill="none"/>
-      ${[...Array(14)].map((_, i) => { const x = (i + 0.5) * (W / 14); const y = H * 0.3 + Math.sin(i * 1.1) * 14 + H * 0.06; return `<circle cx="${x}" cy="${y}" r="10" fill="#ffca7a" opacity="0.9" filter="url(#soft)"/><circle cx="${x}" cy="${y}" r="4" fill="#fff1d6"/>`; }).join("")}
-      <g fill="#0a0d13">
-        ${[...Array(24)].map((_, i) => { const x = (i * W) / 23 + ((i % 3) - 1) * 12; const s = 0.7 + (i % 4) * 0.12; return `<g transform="translate(${x},${jord - 40}) scale(${s})"><circle cx="0" cy="-38" r="11"/><path d="M-17,-28 Q0,-38 17,-28 L15,26 L-15,26 Z"/></g>`; }).join("")}
+      <rect width="${W}" height="${H}" fill="url(#aften4)"/>
+
+      <!-- scenelys-stråler fra toppen -->
+      <polygon points="${W * 0.3},0 ${W * 0.12},${jord} ${W * 0.42},${jord}" fill="url(#straaleR)" opacity="0.5"/>
+      <polygon points="${W * 0.5},0 ${W * 0.36},${jord} ${W * 0.66},${jord}" fill="url(#straale4)" opacity="0.6"/>
+      <polygon points="${W * 0.72},0 ${W * 0.6},${jord} ${W * 0.9},${jord}" fill="url(#straaleR)" opacity="0.4"/>
+
+      <!-- scene i baggrunden med glød -->
+      <rect x="${W * 0.3}" y="${jord - H * 0.34}" width="${W * 0.4}" height="${H * 0.34}" fill="#0a0a14"/>
+      <circle cx="${W * 0.5}" cy="${jord - H * 0.28}" r="${H * 0.16}" fill="#ffca7a" opacity="0.28" filter="url(#soft4)"/>
+      <circle cx="${W * 0.5}" cy="${jord - H * 0.28}" r="${H * 0.06}" fill="#fff1d6" opacity="0.7"/>
+
+      <!-- lyskæde -->
+      <path d="M0,${H * 0.22} Q${W * 0.5},${H * 0.34} ${W},${H * 0.2}" stroke="#3a3f4a" stroke-width="2" fill="none"/>
+      ${[...Array(16)].map((_, i) => { const x = (i + 0.5) * (W / 16); const y = H * 0.22 + Math.sin(i * 0.9) * 16 + H * 0.05; const c = i % 3 === 0 ? "#ff8a94" : "#ffd9a0"; return `<circle cx="${x}" cy="${y}" r="9" fill="${c}" opacity="0.9" filter="url(#soft4)"/><circle cx="${x}" cy="${y}" r="3.5" fill="#fff1d6"/>`; }).join("")}
+
+      <!-- publikum (flere lag for dybde) -->
+      <g fill="#141020" opacity="0.7">
+        ${[...Array(28)].map((_, i) => { const x = (i * W) / 27 + ((i % 3) - 1) * 10; return `<g transform="translate(${x},${jord - 70}) scale(${0.6 + (i % 3) * 0.08})"><circle cx="0" cy="-34" r="10"/><path d="M-15,-26 Q0,-34 15,-26 L13,20 L-13,20 Z"/></g>`; }).join("")}
       </g>
+      <g fill="#08060e">
+        ${[...Array(22)].map((_, i) => { const x = (i * W) / 21 + ((i % 2) ? 14 : -8); return `<g transform="translate(${x},${jord - 34}) scale(${0.85 + (i % 4) * 0.1})"><circle cx="0" cy="-36" r="11"/><path d="M-17,-27 Q0,-36 17,-27 L15,24 L-15,24 Z"/></g>`; }).join("")}
+      </g>
+
+      <!-- afspærring foran -->
       <rect y="${jord}" width="${W}" height="${H - jord}" fill="#0a0c10"/>
-      <g stroke="#39424c" stroke-width="6">
-        <line x1="0" y1="${jord - 14}" x2="${W}" y2="${jord - 14}"/>
-        <line x1="0" y1="${jord - 46}" x2="${W}" y2="${jord - 46}"/>
-        ${[...Array(9)].map((_, i) => `<line x1="${(i * W) / 8}" y1="${jord - 50}" x2="${(i * W) / 8}" y2="${jord}"/>`).join("")}
+      <g stroke="#4a525b" stroke-width="6">
+        <line x1="0" y1="${jord - 12}" x2="${W}" y2="${jord - 12}"/>
+        <line x1="0" y1="${jord - 44}" x2="${W}" y2="${jord - 44}"/>
+        ${[...Array(9)].map((_, i) => `<line x1="${(i * W) / 8}" y1="${jord - 48}" x2="${(i * W) / 8}" y2="${jord}"/>`).join("")}
       </g>
-      ${vagt({ x: W * 0.24, y: jord - 20, s: 1.5 })}
-      <ellipse cx="${W * 0.24}" cy="${jord + 72}" rx="60" ry="10" fill="#000" opacity="0.5"/>
-      ${vignet(0.55)}${korn(0.05)}
+
+      <!-- vagt i forgrunden med rim-lys -->
+      ${vagt({ x: W * 0.2, y: jord - 18, s: 1.7 })}
+      <path d="M${W * 0.2 - 30},${jord - 128} Q${W * 0.2},${jord - 142} ${W * 0.2 + 30},${jord - 128}" stroke="#ffb3bb" stroke-width="3" fill="none" opacity="0.4"/>
+      <ellipse cx="${W * 0.2}" cy="${jord + 78}" rx="66" ry="11" fill="#000" opacity="0.5"/>
+      ${vignet(0.5)}${korn(0.05)}
     `);
   },
 
-  // 5) Kommunevagt (dag)
+  // 5) Kommunevagt — roligt, serviceorienteret dagslys ved en offentlig bygning
   "kommune-vagt-dag": (W, H) => {
-    const jord = H * 0.82;
+    const jord = H * 0.84;
     return svgRamme(W, H, `
       <defs>
-        <linearGradient id="dag5" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#8b99a6"/><stop offset="1" stop-color="#aab4bd"/>
+        <linearGradient id="himmel5" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#7fa6c4"/>
+          <stop offset="0.6" stop-color="#a9c2d4"/>
+          <stop offset="1" stop-color="#d7dfe4"/>
         </linearGradient>
+        <radialGradient id="sol5" cx="80%" cy="18%" r="40%">
+          <stop offset="0" stop-color="#fff4dc" stop-opacity="0.9"/>
+          <stop offset="1" stop-color="#fff4dc" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="mur5" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#c9cdd0"/>
+          <stop offset="1" stop-color="#9aa0a6"/>
+        </linearGradient>
+        <filter id="slør5"><feGaussianBlur stdDeviation="5"/></filter>
       </defs>
-      <rect width="${W}" height="${H}" fill="url(#dag5)"/>
-      <g fill="#39434e">
-        <rect x="${W * 0.18}" y="${jord - H * 0.5}" width="${W * 0.64}" height="${H * 0.5}"/>
-        <rect x="${W * 0.14}" y="${jord - H * 0.53}" width="${W * 0.72}" height="${H * 0.045}"/>
-        ${[...Array(3)].map((_, r) => [...Array(7)].map((_, c) => `<rect x="${W * 0.225 + c * W * 0.078}" y="${jord - H * 0.45 + r * H * 0.14}" width="${W * 0.045}" height="${H * 0.09}" fill="#212a33"/>`).join("")).join("")}
-        <rect x="${W * 0.45}" y="${jord - H * 0.17}" width="${W * 0.1}" height="${H * 0.17}" fill="#1a2129"/>
+      <rect width="${W}" height="${H}" fill="url(#himmel5)"/>
+      <rect width="${W}" height="${jord}" fill="url(#sol5)"/>
+      <!-- skyer -->
+      ${[[0.2, 0.16, 1], [0.55, 0.1, 0.8], [0.82, 0.2, 1.1]].map(([cx, cy, s]) => `
+        <g fill="#ffffff" opacity="0.7" filter="url(#slør5)" transform="translate(${W * cx},${H * cy}) scale(${s})">
+          <ellipse cx="0" cy="0" rx="${W * 0.05}" ry="14"/>
+          <ellipse cx="${W * 0.035}" cy="6" rx="${W * 0.045}" ry="12"/>
+          <ellipse cx="${-W * 0.035}" cy="6" rx="${W * 0.04}" ry="11"/>
+        </g>`).join("")}
+
+      <!-- rådhus/offentlig bygning med søjler -->
+      <g>
+        <rect x="${W * 0.2}" y="${jord - H * 0.46}" width="${W * 0.6}" height="${H * 0.46}" fill="url(#mur5)"/>
+        <!-- tympanon -->
+        <polygon points="${W * 0.17},${jord - H * 0.46} ${W * 0.5},${jord - H * 0.6} ${W * 0.83},${jord - H * 0.46}" fill="#b7bcc0"/>
+        <polygon points="${W * 0.2},${jord - H * 0.47} ${W * 0.5},${jord - H * 0.575} ${W * 0.8},${jord - H * 0.47}" fill="#cbd0d3"/>
+        <!-- søjler -->
+        ${[...Array(6)].map((_, i) => `<rect x="${W * 0.24 + i * W * 0.093}" y="${jord - H * 0.42}" width="${W * 0.045}" height="${H * 0.42}" fill="#dfe3e6"/><rect x="${W * 0.24 + i * W * 0.093}" y="${jord - H * 0.42}" width="${W * 0.012}" height="${H * 0.42}" fill="#eef1f3"/>`).join("")}
+        <rect x="${W * 0.2}" y="${jord - H * 0.44}" width="${W * 0.6}" height="${H * 0.03}" fill="#eef1f3"/>
+        <rect x="${W * 0.18}" y="${jord - H * 0.02}" width="${W * 0.64}" height="${H * 0.02}" fill="#8a9096"/>
+        <!-- indgang -->
+        <rect x="${W * 0.45}" y="${jord - H * 0.2}" width="${W * 0.1}" height="${H * 0.2}" fill="#5b636c"/>
+        <rect x="${W * 0.455}" y="${jord - H * 0.19}" width="${W * 0.045}" height="${H * 0.19}" fill="#3a4148"/>
+        <rect x="${W * 0.5}" y="${jord - H * 0.19}" width="${W * 0.045}" height="${H * 0.19}" fill="#3a4148"/>
+        <!-- flag -->
+        <rect x="${W * 0.5 - 2}" y="${jord - H * 0.72}" width="4" height="${H * 0.12}" fill="#5b636c"/>
+        <path d="M${W * 0.5 + 2},${jord - H * 0.72} L${W * 0.56},${jord - H * 0.695} L${W * 0.5 + 2},${jord - H * 0.67} Z" fill="#d42233"/>
       </g>
-      <g fill="#2f3a44">
-        <circle cx="${W * 0.08}" cy="${jord - H * 0.16}" r="${H * 0.09}"/>
-        <rect x="${W * 0.075}" y="${jord - H * 0.12}" width="8" height="${H * 0.12}"/>
-        <circle cx="${W * 0.93}" cy="${jord - H * 0.14}" r="${H * 0.075}"/>
-        <rect x="${W * 0.925}" y="${jord - H * 0.1}" width="8" height="${H * 0.1}"/>
-      </g>
-      <rect y="${jord}" width="${W}" height="${H - jord}" fill="#5b636c"/>
-      <rect y="${jord}" width="${W}" height="8" fill="#4a525b"/>
-      ${vagt({ x: W * 0.38, y: jord - 56, s: 1.2, stribe: "#e8b25a" })}
-      <ellipse cx="${W * 0.38}" cy="${jord + 18}" rx="44" ry="7" fill="#000" opacity="0.25"/>
-      ${vignet(0.3)}${korn(0.04)}
+
+      <!-- træer -->
+      ${[W * 0.1, W * 0.9].map((tx) => `
+        <rect x="${tx - 4}" y="${jord - H * 0.18}" width="8" height="${H * 0.18}" fill="#5a4a38"/>
+        <circle cx="${tx}" cy="${jord - H * 0.22}" r="${H * 0.09}" fill="#5c7a52"/>
+        <circle cx="${tx - 18}" cy="${jord - H * 0.17}" r="${H * 0.06}" fill="#6a8a5e"/>
+        <circle cx="${tx + 18}" cy="${jord - H * 0.18}" r="${H * 0.065}" fill="#547049"/>
+      `).join("")}
+
+      <!-- fortov -->
+      <rect y="${jord}" width="${W}" height="${H - jord}" fill="#b9bec2"/>
+      <rect y="${jord}" width="${W}" height="6" fill="#9aa0a6"/>
+      ${[...Array(10)].map((_, i) => `<rect x="${(i * W) / 10}" y="${jord + 4}" width="2" height="${H - jord}" fill="#a7adb2"/>`).join("")}
+
+      <!-- vagt (rolig, serviceorienteret) med blød skygge -->
+      <ellipse cx="${W * 0.36}" cy="${jord + 12}" rx="46" ry="7" fill="#000" opacity="0.18"/>
+      ${vagt({ x: W * 0.36, y: jord - 58, s: 1.3, stribe: "#e8b25a" })}
+      ${vignet(0.22)}${korn(0.035)}
     `);
   },
 
