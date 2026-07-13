@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "eslint",
     "billeder": "tsx scripts/gen-billeder.ts",
+    "illustrationer": "node scripts/gen-illustrationer.mjs && tsx scripts/gen-billeder.ts",
     "scrape": "tsx scripts/scrape.ts"
   },
   "dependencies": {
@@ -33,6 +34,7 @@
     "cheerio": "^1.2.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
+    "playwright-core": "^1.61.1",
     "tailwindcss": "^4",
     "tsx": "^4.23.1",
     "typescript": "^5"

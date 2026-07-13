@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { virksomhed } from "@/content/virksomhed";
 import { MagnetiskKnap } from "@/components/MagnetiskKnap";
+import { BILLEDER } from "@/lib/billed-manifest";
 
 // Cinematisk hero: dag→nat-gradient, kornstruktur, hairline-gitter og en
 // projektør-/lygtekegle der følger musen. Rammesekvens-canvas kan hydreres
@@ -49,6 +51,18 @@ export function CinematiskHero() {
             "radial-gradient(120% 90% at 80% 10%, #16324a 0%, #0d1926 35%, #0b0f14 70%), radial-gradient(60% 50% at 15% 85%, rgba(212,34,51,0.10), transparent 60%)",
         }}
       />
+      {/* Hero-illustration: nat-byggeplads med vagt (LCP-poster) */}
+      {BILLEDER["hero-byggeplads-nat"] && (
+        <Image
+          src={BILLEDER["hero-byggeplads-nat"]}
+          alt=""
+          aria-hidden
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[65%_center] opacity-70"
+        />
+      )}
       {/* Amber floodlight-glød nederst til højre */}
       <div
         aria-hidden
