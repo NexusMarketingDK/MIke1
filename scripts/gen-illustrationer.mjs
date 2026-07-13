@@ -375,41 +375,99 @@ const scener = {
     `);
   },
 
-  // 6) Runderingsbil, nat
+  // 6) Runderingsbil på våd vej, nat
   "rundering-koeretoej-nat": (W, H) => {
-    const jord = H * 0.72;
+    const jord = H * 0.7;
+    const bilX = W * 0.36;
+    const bilY = jord - 6;
+    // Oplyst vindue i baggrundsbygning.
+    const vind = (x, y, tændt) =>
+      `<rect x="${x}" y="${y}" width="${W * 0.014}" height="${H * 0.022}" fill="${tændt ? "#ffcf87" : "#0d1722"}" opacity="${tændt ? 0.85 : 1}"/>`;
     return svgRamme(W, H, `
       <defs>
         <linearGradient id="nat6" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#0a1220"/><stop offset="1" stop-color="#0b0f14"/>
+          <stop offset="0" stop-color="#070e1a"/>
+          <stop offset="0.55" stop-color="#122438"/>
+          <stop offset="1" stop-color="#0b1420"/>
         </linearGradient>
-        <linearGradient id="vaad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#141d29"/><stop offset="1" stop-color="#05070a"/>
+        <linearGradient id="vaad6" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#16273a"/>
+          <stop offset="1" stop-color="#04070b"/>
         </linearGradient>
-        <linearGradient id="lyskegle" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stop-color="#ffe9c4" stop-opacity="0.9"/><stop offset="1" stop-color="#ffe9c4" stop-opacity="0"/>
+        <linearGradient id="kegle6" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#fff2d6" stop-opacity="0.95"/>
+          <stop offset="1" stop-color="#ffe9c4" stop-opacity="0"/>
         </linearGradient>
+        <radialGradient id="lygteglod6" cx="50%" cy="50%" r="50%">
+          <stop offset="0" stop-color="#ffd08a" stop-opacity="0.85"/>
+          <stop offset="1" stop-color="#ffb85c" stop-opacity="0"/>
+        </radialGradient>
+        <filter id="slør6"><feGaussianBlur stdDeviation="6"/></filter>
       </defs>
       <rect width="${W}" height="${H}" fill="url(#nat6)"/>
-      <g fill="#04070b">
-        ${[...Array(8)].map((_, i) => `<rect x="${i * W * 0.13}" y="${jord - 60 - (i % 3) * 40}" width="${W * 0.1}" height="${60 + (i % 3) * 40}"/>`).join("")}
-      </g>
-      <rect y="${jord}" width="${W}" height="${H - jord}" fill="url(#vaad)"/>
-      <polygon points="${W * 0.62},${jord - 40} ${W},${jord - 110} ${W},${jord + 10}" fill="url(#lyskegle)" opacity="0.55"/>
+      <!-- måne-glød -->
+      <circle cx="${W * 0.3}" cy="${H * 0.22}" r="${H * 0.2}" fill="#3a6a86" opacity="0.14" filter="url(#slør6)"/>
+      <circle cx="${W * 0.3}" cy="${H * 0.22}" r="${H * 0.04}" fill="#dbeaf3" opacity="0.8"/>
+      ${[...Array(50)].map((_, i) => `<circle cx="${(i * 151) % W}" cy="${(i * 63) % (jord * 0.55)}" r="${i % 9 === 0 ? 1.6 : 0.6}" fill="#cfe0ee" opacity="${0.1 + (i % 5) * 0.08}"/>`).join("")}
+
+      <!-- bybygninger med lys -->
       <g>
-        <path d="M${W * 0.3},${jord - 44} Q${W * 0.36},${jord - 92} ${W * 0.46},${jord - 94} L${W * 0.56},${jord - 94} Q${W * 0.64},${jord - 90} ${W * 0.66},${jord - 46} L${W * 0.66},${jord - 18} L${W * 0.3},${jord - 18} Z" fill="#0c1117"/>
-        <path d="M${W * 0.375},${jord - 86} L${W * 0.45},${jord - 88} L${W * 0.45},${jord - 58} L${W * 0.35},${jord - 56} Z" fill="#1b2836"/>
-        <rect x="${W * 0.3}" y="${jord - 44}" width="${W * 0.36}" height="9" fill="#d42233" opacity="0.9"/>
-        <circle cx="${W * 0.38}" cy="${jord - 12}" r="26" fill="#05070a" stroke="#222a33" stroke-width="6"/>
-        <circle cx="${W * 0.58}" cy="${jord - 12}" r="26" fill="#05070a" stroke="#222a33" stroke-width="6"/>
-        <circle cx="${W * 0.655}" cy="${jord - 40}" r="9" fill="#ffe9c4"/>
+        ${[...Array(7)].map((_, i) => {
+          const bx = i * W * 0.15 - W * 0.02;
+          const bh = H * (0.16 + ((i * 5) % 4) * 0.06);
+          let vinduer = "";
+          for (let r = 0; r < 6; r++) for (let c = 0; c < 4; c++) {
+            vinduer += vind(bx + W * 0.02 + c * W * 0.028, jord - bh + H * 0.02 + r * H * 0.028, (i * 13 + r * 4 + c) % 4 === 0);
+          }
+          return `<g><rect x="${bx}" y="${jord - bh}" width="${W * 0.13}" height="${bh}" fill="#0a1320"/>${vinduer}</g>`;
+        }).join("")}
       </g>
-      <g opacity="0.35" transform="translate(0,${jord * 2 - 12}) scale(1,-1)">
-        <rect x="${W * 0.3}" y="${jord - 44}" width="${W * 0.36}" height="30" fill="#1b2836"/>
-        <polygon points="${W * 0.62},${jord - 40} ${W},${jord - 80} ${W},${jord}" fill="url(#lyskegle)" opacity="0.5"/>
+
+      <!-- gadelamper med amber-pøl -->
+      ${[W * 0.12, W * 0.82].map((lx) => `
+        <rect x="${lx - 3}" y="${jord - H * 0.34}" width="6" height="${H * 0.34}" fill="#04070b"/>
+        <rect x="${lx - 20}" y="${jord - H * 0.35}" width="24" height="8" fill="#04070b"/>
+        <circle cx="${lx - 8}" cy="${jord - H * 0.33}" r="${H * 0.09}" fill="url(#lygteglod6)"/>
+        <circle cx="${lx - 8}" cy="${jord - H * 0.33}" r="7" fill="#ffe9c4"/>
+        <ellipse cx="${lx - 8}" cy="${jord + 40}" rx="${W * 0.05}" ry="14" fill="#ffb85c" opacity="0.1"/>
+      `).join("")}
+
+      <!-- våd vej -->
+      <rect y="${jord}" width="${W}" height="${H - jord}" fill="url(#vaad6)"/>
+      <!-- refleksioner af bygningslys og lamper -->
+      ${[W * 0.12, W * 0.82].map((lx) => `<rect x="${lx - 11}" y="${jord}" width="16" height="${H - jord}" fill="#ffb85c" opacity="0.12"/>`).join("")}
+      ${[...Array(16)].map((_, i) => `<rect x="${(i * W) / 16 + 6}" y="${jord}" width="7" height="${H - jord}" fill="#2a4a63" opacity="${(i % 3) * 0.05 + 0.04}"/>`).join("")}
+
+      <!-- forlygte-kegler -->
+      <polygon points="${bilX + W * 0.16},${bilY - 30} ${W * 1.02},${jord - H * 0.16} ${W * 1.02},${jord + H * 0.22}" fill="url(#kegle6)" opacity="0.45"/>
+      <polygon points="${bilX + W * 0.16},${bilY - 22} ${W * 1.02},${jord + 6} ${W * 1.02},${jord + H * 0.12}" fill="url(#kegle6)" opacity="0.5"/>
+
+      <!-- patruljebil (set skråt bagfra) -->
+      <g>
+        <ellipse cx="${bilX + W * 0.08}" cy="${bilY + 6}" rx="${W * 0.13}" ry="14" fill="#000" opacity="0.5"/>
+        <path d="M${bilX - W * 0.02},${bilY} L${bilX - W * 0.02},${bilY - 34} Q${bilX + W * 0.01},${bilY - 40} ${bilX + W * 0.05},${bilY - 42} L${bilX + W * 0.06},${bilY - 66} Q${bilX + W * 0.08},${bilY - 74} ${bilX + W * 0.12},${bilY - 74} L${bilX + W * 0.15},${bilY - 72} Q${bilX + W * 0.18},${bilY - 66} ${bilX + W * 0.185},${bilY - 40} L${bilX + W * 0.2},${bilY - 34} L${bilX + W * 0.2},${bilY} Z" fill="#0c141e"/>
+        <!-- bagrude + rødt lys -->
+        <path d="M${bilX + W * 0.065},${bilY - 64} L${bilX + W * 0.14},${bilY - 64} L${bilX + W * 0.17},${bilY - 44} L${bilX + W * 0.05},${bilY - 44} Z" fill="#16283a"/>
+        <rect x="${bilX - W * 0.02}" y="${bilY - 34}" width="${W * 0.22}" height="8" fill="#d42233"/>
+        <rect x="${bilX - W * 0.01}" y="${bilY - 30}" width="${W * 0.05}" height="10" rx="2" fill="#ff5964"/>
+        <rect x="${bilX + W * 0.14}" y="${bilY - 30}" width="${W * 0.05}" height="10" rx="2" fill="#ff5964"/>
+        <!-- lysbjælke på taget (blå/rød) -->
+        <rect x="${bilX + W * 0.07}" y="${bilY - 80}" width="${W * 0.07}" height="7" rx="3" fill="#0c141e"/>
+        <rect x="${bilX + W * 0.07}" y="${bilY - 80}" width="${W * 0.035}" height="7" rx="3" fill="#ff3b46"/>
+        <rect x="${bilX + W * 0.105}" y="${bilY - 80}" width="${W * 0.035}" height="7" rx="3" fill="#3b7bff"/>
+        <circle cx="${bilX + W * 0.09}" cy="${bilY - 77}" r="16" fill="#ff3b46" opacity="0.2"/>
+        <circle cx="${bilX + W * 0.12}" cy="${bilY - 77}" r="16" fill="#3b7bff" opacity="0.2"/>
+        <!-- hjul -->
+        <circle cx="${bilX + W * 0.02}" cy="${bilY}" r="17" fill="#05070a" stroke="#232c37" stroke-width="5"/>
+        <circle cx="${bilX + W * 0.16}" cy="${bilY}" r="17" fill="#05070a" stroke="#232c37" stroke-width="5"/>
       </g>
-      ${[...Array(12)].map((_, i) => `<rect x="${(i * W) / 12 + 10}" y="${jord + 20 + (i % 4) * 14}" width="${30 + (i % 3) * 26}" height="2.5" fill="#283334" opacity="0.5"/>`).join("")}
-      ${vignet(0.55)}${korn(0.06)}
+      <!-- refleksion af bilens røde lys -->
+      <rect x="${bilX - W * 0.02}" y="${jord}" width="${W * 0.22}" height="${H - jord}" fill="#d42233" opacity="0.08"/>
+
+      <!-- regnstriber -->
+      ${[...Array(60)].map((_, i) => `<line x1="${(i * 97) % W}" y1="${(i * 53) % jord}" x2="${(i * 97) % W - 6}" y2="${(i * 53) % jord + 22}" stroke="#9fc0d8" stroke-width="1" opacity="0.12"/>`).join("")}
+
+      ${vignet(0.58)}${korn(0.06)}
     `);
   },
 
