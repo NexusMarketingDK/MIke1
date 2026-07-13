@@ -9,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/om-mtvagt",
     "/vi-tilbyder",
+    "/referencer",
     "/blog",
     "/kontakt",
     "/ledige-stillinger",

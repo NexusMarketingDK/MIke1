@@ -44,6 +44,7 @@ export function Sidefod() {
           <ul className="mt-4 space-y-2 text-sm">
             {[
               { href: "/om-mtvagt", t: "Om MT Vagt" },
+              { href: "/referencer", t: "Referencer" },
               { href: "/blog", t: "Blog" },
               { href: "/ledige-stillinger", t: "Ledige stillinger" },
               { href: "/kontakt", t: "Kontakt" },

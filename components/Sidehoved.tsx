@@ -11,6 +11,7 @@ const nav = [
   { href: "/", label: "Forside" },
   { href: "/om-mtvagt", label: "Om os" },
   { href: "/vi-tilbyder", label: "Ydelser", undermenu: true },
+  { href: "/referencer", label: "Referencer" },
   { href: "/blog", label: "Blog" },
   { href: "/ledige-stillinger", label: "Job" },
   { href: "/kontakt", label: "Kontakt" },
