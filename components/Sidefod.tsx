@@ -3,6 +3,7 @@ import { virksomhed } from "@/content/virksomhed";
 import { ydelser } from "@/content/ydelser";
 import { Logo } from "@/components/Logo";
 import { EmailLink } from "@/components/EmailLink";
+import { PopupLink } from "@/components/PopupLink";
 
 export function Sidefod() {
   const aar = new Date().getFullYear();
@@ -83,20 +84,20 @@ export function Sidefod() {
             </p>
           </address>
           <div className="mt-4 flex flex-wrap gap-2 text-xs text-staal">
-            <a
+            <PopupLink
               href={virksomhed.autorisation.isoCertifikat}
               className="rounded-full border border-linje px-3 py-1 hover:text-krom"
+              ariaLabel="Åbn ISO-certifikat i nyt vindue"
             >
               ISO-certifikat
-            </a>
-            <a
+            </PopupLink>
+            <PopupLink
               href={virksomhed.autorisation.vslUrl}
-              target="_blank"
-              rel="noopener noreferrer"
               className="rounded-full border border-linje px-3 py-1 hover:text-krom"
+              ariaLabel="Åbn vsl.dk i nyt vindue"
             >
               Medlem af VSL
-            </a>
+            </PopupLink>
           </div>
         </div>
       </div>

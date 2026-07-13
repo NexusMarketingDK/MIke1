@@ -58,14 +58,18 @@ export default function OmSide() {
             </blockquote>
           </Afsloer>
           <Afsloer delay={0.1}>
-            <Billede
-              navn="team-briefing"
-              variant="interior"
-              alt="To vagter fra MT Vagt i en rolig, professionel briefing"
-              ratio="4:5"
-              prioritet
-              className="mx-auto max-w-md lg:max-w-none"
-            />
+            <figure className="mx-auto max-w-md lg:max-w-none">
+              <Billede
+                navn="mike"
+                variant="interior"
+                alt="Mike fra MT Vagt — autoriseret vagt"
+                ratio="4:5"
+                prioritet
+              />
+              <figcaption className="mt-3 text-center text-sm text-staal-lys">
+                Mike — MT Vagt
+              </figcaption>
+            </figure>
           </Afsloer>
         </div>
       </section>

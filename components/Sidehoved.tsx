@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { Logo } from "@/components/Logo";
 
 const nav = [
+  { href: "/", label: "Forside" },
   { href: "/om-mtvagt", label: "Om os" },
   { href: "/vi-tilbyder", label: "Ydelser", undermenu: true },
   { href: "/blog", label: "Blog" },
