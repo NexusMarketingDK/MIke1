@@ -583,21 +583,49 @@ const scener = {
     const gulv = H * 0.84;
     return svgRamme(W, H, `
       <defs>
-        <linearGradient id="rum" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#241c12"/><stop offset="1" stop-color="#120d08"/>
+        <linearGradient id="rum7" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#2b241a"/>
+          <stop offset="0.55" stop-color="#1c150d"/>
+          <stop offset="1" stop-color="#0f0b06"/>
         </linearGradient>
-        <filter id="blur7"><feGaussianBlur stdDeviation="10"/></filter>
+        <radialGradient id="varme7" cx="50%" cy="30%" r="60%">
+          <stop offset="0" stop-color="#ffcf8a" stop-opacity="0.28"/>
+          <stop offset="1" stop-color="#ffcf8a" stop-opacity="0"/>
+        </radialGradient>
+        <filter id="blur7"><feGaussianBlur stdDeviation="8"/></filter>
       </defs>
-      <rect width="${W}" height="${H}" fill="url(#rum)"/>
-      ${[...Array(3)].map((_, r) => `
-        <g transform="translate(0,${H * 0.18 + r * H * 0.18})" filter="url(#blur7)" opacity="${0.8 - r * 0.15}">
-          <rect x="${W * 0.06}" y="0" width="${W * 0.88}" height="10" fill="#4a392c"/>
-          ${[...Array(9)].map((_, i) => `<rect x="${W * 0.09 + i * W * 0.095}" y="-34" width="${W * 0.055}" height="34" rx="4" fill="${["#6b4a2e", "#3e4a56", "#7a5a38", "#59432b"][i % 4]}"/>`).join("")}
+      <rect width="${W}" height="${H}" fill="url(#rum7)"/>
+      <rect width="${W}" height="${gulv}" fill="url(#varme7)"/>
+
+      <!-- loft med lyspaneler i perspektiv -->
+      ${[...Array(4)].map((_, i) => {
+        const y = H * 0.06 + i * H * 0.05;
+        const inset = i * W * 0.03;
+        return `<rect x="${W * 0.2 + inset}" y="${y}" width="${W * 0.6 - inset * 2}" height="${H * 0.012}" rx="3" fill="#ffe9c4" opacity="${0.85 - i * 0.15}"/><rect x="${W * 0.2 + inset}" y="${y}" width="${W * 0.6 - inset * 2}" height="${H * 0.05}" fill="#ffca7a" opacity="${0.06}" filter="url(#blur7)"/>`;
+      }).join("")}
+
+      <!-- bagvæg / perspektivgulv -->
+      <polygon points="0,${gulv} ${W * 0.3},${H * 0.42} ${W * 0.7},${H * 0.42} ${W},${gulv}" fill="#171009"/>
+
+      <!-- reoler i to rækker (perspektiv mod midten) -->
+      ${[
+        { x: W * 0.02, w: W * 0.24, flip: 1 },
+        { x: W * 0.74, w: W * 0.24, flip: -1 },
+      ].map((s) => `
+        <g>
+          <polygon points="${s.x},${H * 0.34} ${s.x + s.flip * s.w},${H * 0.44} ${s.x + s.flip * s.w},${gulv} ${s.x},${gulv - H * 0.02}" fill="#241a10"/>
+          ${[...Array(5)].map((_, r) => `<polygon points="${s.x},${H * 0.4 + r * H * 0.09} ${s.x + s.flip * s.w},${H * 0.47 + r * H * 0.08} ${s.x + s.flip * s.w},${H * 0.49 + r * H * 0.08} ${s.x},${H * 0.42 + r * H * 0.09}" fill="#3a2c1a"/>`).join("")}
+          ${[...Array(5)].map((_, r) => [...Array(6)].map((_, c) => `<rect x="${s.x + s.flip * (c * s.w * 0.16 + s.w * 0.04)}" y="${H * 0.4 + r * H * 0.09 - H * 0.05}" width="${s.w * 0.1}" height="${H * 0.045}" rx="2" fill="${["#8a5a34", "#4a6070", "#9a7040", "#6a4a30", "#3e5560"][(r + c) % 5]}" opacity="0.9"/>`).join("")).join("")}
         </g>`).join("")}
-      ${[...Array(4)].map((_, i) => `<circle cx="${W * (0.2 + i * 0.2)}" cy="${H * 0.08}" r="16" fill="#ffca7a" opacity="0.8" filter="url(#blur7)"/>`).join("")}
-      <rect y="${gulv}" width="${W}" height="${H - gulv}" fill="#0d0a06"/>
-      ${vagt({ x: W * 0.5, y: gulv - 90, s: 2.1, stribe: "#d9b06a" })}
-      <ellipse cx="${W * 0.5}" cy="${gulv + 40}" rx="90" ry="14" fill="#000" opacity="0.5"/>
+
+      <!-- gulv med refleksion -->
+      <rect y="${gulv}" width="${W}" height="${H - gulv}" fill="#120c07"/>
+      <ellipse cx="${W * 0.5}" cy="${gulv + H * 0.05}" rx="${W * 0.3}" ry="${H * 0.03}" fill="#ffcf8a" opacity="0.06"/>
+
+      <!-- diskret vagt i forgrunden -->
+      <ellipse cx="${W * 0.5}" cy="${gulv + 34}" rx="86" ry="13" fill="#000" opacity="0.45"/>
+      ${vagt({ x: W * 0.5, y: gulv - 86, s: 2.0, stribe: "#d9b06a" })}
+      <path d="M${W * 0.5 - 30},${gulv - 232} Q${W * 0.5},${gulv - 250} ${W * 0.5 + 30},${gulv - 232}" stroke="#ffdca0" stroke-width="3" fill="none" opacity="0.3"/>
       ${vignet(0.5)}${korn(0.05)}
     `);
   },
@@ -634,26 +662,56 @@ const scener = {
     return svgRamme(W, H, `
       <defs>
         <linearGradient id="rum9" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#232a31"/><stop offset="1" stop-color="#14181d"/>
+          <stop offset="0" stop-color="#2a2822"/>
+          <stop offset="0.6" stop-color="#1d1b17"/>
+          <stop offset="1" stop-color="#141210"/>
         </linearGradient>
-        <linearGradient id="lys9" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#dfe8ef" stop-opacity="0.5"/><stop offset="1" stop-color="#dfe8ef" stop-opacity="0"/>
+        <radialGradient id="lampe9" cx="50%" cy="50%" r="50%">
+          <stop offset="0" stop-color="#ffd7a0" stop-opacity="0.55"/>
+          <stop offset="1" stop-color="#ffd7a0" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="vindue9" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#1b3550"/>
+          <stop offset="1" stop-color="#0e1f33"/>
         </linearGradient>
+        <filter id="slør9"><feGaussianBlur stdDeviation="7"/></filter>
       </defs>
       <rect width="${W}" height="${H}" fill="url(#rum9)"/>
-      <rect x="${W * 0.14}" y="${H * 0.12}" width="${W * 0.34}" height="${H * 0.42}" fill="#9fb4c4" opacity="0.35" rx="6"/>
-      <line x1="${W * 0.31}" y1="${H * 0.12}" x2="${W * 0.31}" y2="${H * 0.54}" stroke="#14181d" stroke-width="8"/>
-      <line x1="${W * 0.14}" y1="${H * 0.33}" x2="${W * 0.48}" y2="${H * 0.33}" stroke="#14181d" stroke-width="8"/>
-      <polygon points="${W * 0.14},${H * 0.12} ${W * 0.48},${H * 0.12} ${W * 0.85},${gulv} ${W * 0.3},${gulv}" fill="url(#lys9)"/>
-      <g fill="#1b2127">
-        <ellipse cx="${W * 0.82}" cy="${H * 0.5}" rx="${W * 0.1}" ry="${H * 0.08}"/>
-        <rect x="${W * 0.8}" y="${H * 0.55}" width="${W * 0.045}" height="${H * 0.1}"/>
-        <rect x="${W * 0.74}" y="${H * 0.65}" width="${W * 0.16}" height="${H * 0.05}" rx="10"/>
+
+      <!-- vindue med nat udenfor + måne -->
+      <rect x="${W * 0.12}" y="${H * 0.14}" width="${W * 0.32}" height="${H * 0.4}" rx="6" fill="url(#vindue9)"/>
+      <circle cx="${W * 0.36}" cy="${H * 0.24}" r="${W * 0.045}" fill="#dbeaf3" opacity="0.85"/>
+      <circle cx="${W * 0.36}" cy="${H * 0.24}" r="${W * 0.09}" fill="#8fb0c8" opacity="0.25" filter="url(#slør9)"/>
+      <line x1="${W * 0.28}" y1="${H * 0.14}" x2="${W * 0.28}" y2="${H * 0.54}" stroke="#2a2620" stroke-width="7"/>
+      <line x1="${W * 0.12}" y1="${H * 0.34}" x2="${W * 0.44}" y2="${H * 0.34}" stroke="#2a2620" stroke-width="7"/>
+      <rect x="${W * 0.1}" y="${H * 0.12}" width="${W * 0.36}" height="${H * 0.44}" rx="8" fill="none" stroke="#3a352c" stroke-width="6"/>
+
+      <!-- varm væglampe med blødt lys -->
+      <circle cx="${W * 0.74}" cy="${H * 0.3}" r="${H * 0.16}" fill="url(#lampe9)"/>
+      <rect x="${W * 0.72}" y="${H * 0.22}" width="${W * 0.04}" height="${H * 0.05}" rx="6" fill="#ffe4b0" opacity="0.9"/>
+
+      <!-- lyspøl på gulvet fra vindue + lampe -->
+      <polygon points="${W * 0.12},${H * 0.5} ${W * 0.46},${H * 0.5} ${W * 0.7},${gulv} ${W * 0.2},${gulv}" fill="#8fb0c8" opacity="0.06"/>
+      <ellipse cx="${W * 0.72}" cy="${gulv - 6}" rx="${W * 0.22}" ry="${H * 0.03}" fill="#ffd7a0" opacity="0.12"/>
+
+      <!-- rolig lænestol + plante (hjemligt) -->
+      <g fill="#2a231a">
+        <rect x="${W * 0.6}" y="${H * 0.56}" width="${W * 0.22}" height="${H * 0.16}" rx="14"/>
+        <rect x="${W * 0.58}" y="${H * 0.5}" width="${W * 0.06}" height="${H * 0.22}" rx="12"/>
+        <rect x="${W * 0.78}" y="${H * 0.5}" width="${W * 0.06}" height="${H * 0.22}" rx="12"/>
       </g>
-      <rect y="${gulv}" width="${W}" height="${H - gulv}" fill="#101317"/>
-      ${vagt({ x: W * 0.44, y: gulv - 84, s: 1.95, stribe: "#c9d0d6" })}
-      <ellipse cx="${W * 0.44}" cy="${gulv + 36}" rx="84" ry="13" fill="#000" opacity="0.4"/>
-      ${vignet(0.45)}${korn(0.045)}
+      <g>
+        <rect x="${W * 0.16}" y="${H * 0.64}" width="${W * 0.08}" height="${H * 0.1}" rx="4" fill="#3a2c1a"/>
+        ${[...Array(5)].map((_, i) => `<path d="M${W * 0.2},${H * 0.64} Q${W * (0.16 + i * 0.02)},${H * (0.5 + (i % 2) * 0.04)} ${W * (0.14 + i * 0.03)},${H * 0.56}" stroke="#4a6a44" stroke-width="4" fill="none"/>`).join("")}
+      </g>
+
+      <!-- gulv -->
+      <rect y="${gulv}" width="${W}" height="${H - gulv}" fill="#181510"/>
+
+      <!-- rolig, respektfuld vagt -->
+      <ellipse cx="${W * 0.42}" cy="${gulv + 34}" rx="82" ry="12" fill="#000" opacity="0.35"/>
+      ${vagt({ x: W * 0.42, y: gulv - 84, s: 1.95, stribe: "#c9d0d6" })}
+      ${vignet(0.4)}${korn(0.04)}
     `);
   },
 
@@ -663,25 +721,53 @@ const scener = {
     return svgRamme(W, H, `
       <defs>
         <linearGradient id="nat10" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#0b1522"/><stop offset="1" stop-color="#0a0e13"/>
+          <stop offset="0" stop-color="#081020"/>
+          <stop offset="0.6" stop-color="#0d1826"/>
+          <stop offset="1" stop-color="#0a0e13"/>
         </linearGradient>
         <linearGradient id="doer" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#ffdda6"/><stop offset="1" stop-color="#c77f3f"/>
+          <stop offset="0" stop-color="#ffe6bd"/><stop offset="1" stop-color="#c77f3f"/>
         </linearGradient>
+        <radialGradient id="entreglod" cx="50%" cy="50%" r="50%">
+          <stop offset="0" stop-color="#ffcf8a" stop-opacity="0.7"/>
+          <stop offset="1" stop-color="#ffcf8a" stop-opacity="0"/>
+        </radialGradient>
+        <filter id="slør10"><feGaussianBlur stdDeviation="6"/></filter>
       </defs>
       <rect width="${W}" height="${H}" fill="url(#nat10)"/>
-      <g fill="#10161e">
-        <rect x="${W * 0.1}" y="${H * 0.08}" width="${W * 0.8}" height="${jord - H * 0.08}"/>
-        ${[...Array(3)].map((_, r) => [...Array(3)].map((_, c) => `<rect x="${W * 0.17 + c * W * 0.24}" y="${H * 0.14 + r * H * 0.17}" width="${W * 0.12}" height="${H * 0.1}" fill="${r === 1 && c === 2 ? "#3d3120" : "#0a0f15"}"/>`).join("")).join("")}
+      <!-- måne + stjerner -->
+      <circle cx="${W * 0.8}" cy="${H * 0.12}" r="${W * 0.05}" fill="#dbeaf3" opacity="0.85"/>
+      <circle cx="${W * 0.8}" cy="${H * 0.12}" r="${W * 0.14}" fill="#3a6a86" opacity="0.16" filter="url(#slør10)"/>
+      ${[...Array(30)].map((_, i) => `<circle cx="${(i * 173) % W}" cy="${(i * 91) % (H * 0.3)}" r="${i % 7 === 0 ? 1.6 : 0.7}" fill="#cfe0ee" opacity="${0.12 + (i % 4) * 0.08}"/>`).join("")}
+
+      <!-- bygningsfacade -->
+      <g fill="#101820">
+        <rect x="${W * 0.08}" y="${H * 0.1}" width="${W * 0.84}" height="${jord - H * 0.1}"/>
       </g>
-      <rect x="${W * 0.38}" y="${jord - H * 0.24}" width="${W * 0.24}" height="${H * 0.24}" fill="url(#doer)" opacity="0.9"/>
-      <rect x="${W * 0.355}" y="${jord - H * 0.26}" width="${W * 0.29}" height="${H * 0.02}" fill="#1c242e"/>
-      <line x1="${W * 0.5}" y1="${jord - H * 0.24}" x2="${W * 0.5}" y2="${jord}" stroke="#8a5a2c" stroke-width="5"/>
+      <!-- vinduer: nogle oplyste -->
+      ${[...Array(3)].map((_, r) => [...Array(4)].map((_, c) => {
+        const tændt = (r * 4 + c) % 3 === 0 && !(r === 2 && c === 1);
+        return `<rect x="${W * 0.14 + c * W * 0.19}" y="${H * 0.15 + r * H * 0.16}" width="${W * 0.12}" height="${H * 0.1}" fill="${tændt ? "#ffcf87" : "#0a0f15"}" opacity="${tændt ? 0.85 : 1}"/>`;
+      }).join("")).join("")}
+
+      <!-- oplyst entré med glød -->
+      <circle cx="${W * 0.5}" cy="${jord - H * 0.14}" r="${H * 0.16}" fill="url(#entreglod)"/>
+      <rect x="${W * 0.4}" y="${jord - H * 0.26}" width="${W * 0.2}" height="${H * 0.26}" fill="url(#doer)" opacity="0.92"/>
+      <rect x="${W * 0.375}" y="${jord - H * 0.285}" width="${W * 0.25}" height="${H * 0.025}" fill="#1c242e"/>
+      <line x1="${W * 0.5}" y1="${jord - H * 0.26}" x2="${W * 0.5}" y2="${jord}" stroke="#8a5a2c" stroke-width="5"/>
+      <!-- lampe over døren -->
+      <circle cx="${W * 0.5}" cy="${jord - H * 0.3}" r="6" fill="#ffe4b0"/>
+
+      <!-- våd fortov med refleksion af entré -->
       <rect y="${jord}" width="${W}" height="${H - jord}" fill="#07090d"/>
-      <rect x="${W * 0.3}" y="${jord}" width="${W * 0.4}" height="10" fill="#151a21"/>
+      <rect x="${W * 0.4}" y="${jord}" width="${W * 0.2}" height="${H - jord}" fill="#ffcf8a" opacity="0.1"/>
+      <ellipse cx="${W * 0.5}" cy="${jord + 8}" rx="${W * 0.16}" ry="8" fill="#ffcf8a" opacity="0.1"/>
+
+      <!-- fast vagt ved døren -->
+      <ellipse cx="${W * 0.3}" cy="${jord + 30}" rx="70" ry="11" fill="#000" opacity="0.55"/>
       ${vagt({ x: W * 0.3, y: jord - 74, s: 1.8 })}
-      <ellipse cx="${W * 0.3}" cy="${jord + 34}" rx="76" ry="12" fill="#000" opacity="0.55"/>
-      ${vignet(0.55)}${korn(0.055)}
+      <path d="M${W * 0.3 - 24},${jord - 130} Q${W * 0.3},${jord - 142} ${W * 0.3 + 24},${jord - 130}" stroke="#ffd9a0" stroke-width="2.5" fill="none" opacity="0.4"/>
+      ${vignet(0.55)}${korn(0.05)}
     `);
   },
 
