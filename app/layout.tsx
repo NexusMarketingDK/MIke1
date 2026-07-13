@@ -5,6 +5,7 @@ import { Sidehoved } from "@/components/Sidehoved";
 import { Sidefod } from "@/components/Sidefod";
 import { RulleFremgang } from "@/components/RulleFremgang";
 import { MobilRingBjaelke } from "@/components/MobilRingBjaelke";
+import { GlatRul } from "@/components/GlatRul";
 
 // Grotesk til overskrifter
 const archivo = Archivo({
@@ -45,6 +46,7 @@ export default function RootLayout({
       className={`${archivo.variable} ${inter.variable} h-full`}
     >
       <body className="min-h-full flex flex-col bg-ink text-krom">
+        <GlatRul />
         <RulleFremgang />
         <Sidehoved />
         <main className="flex-1">{children}</main>

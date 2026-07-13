@@ -19,6 +19,7 @@ function Taeller({ til, suffix }: { til: number; suffix: string }) {
 
   useEffect(() => {
     if (!iView || reducer) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setVaerdi(til);
       return;
     }

@@ -15,6 +15,8 @@ export function EmailLink({
   const [adresse, setAdresse] = useState<string>("");
 
   useEffect(() => {
+    // Klient-kun: adressen må ikke ligge i serverens HTML (spam-beskyttelse).
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setAdresse(byggEmail());
   }, []);
 
