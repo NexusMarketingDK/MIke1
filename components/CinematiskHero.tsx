@@ -106,7 +106,7 @@ export function CinematiskHero() {
             Autoriseret vagtselskab · Middelfart
           </span>
 
-          <h1 className="mt-6 text-balance text-5xl font-extrabold leading-[0.98] tracking-tight text-krom sm:text-6xl lg:text-7xl">
+          <h1 className="mt-6 text-balance text-[2rem] font-extrabold leading-[1.05] tracking-tight text-krom [overflow-wrap:anywhere] sm:text-5xl sm:leading-[0.98] md:text-6xl lg:text-7xl">
             Tryghed hele døgnet
             <span className="block text-staal-lys">
               i <span className="text-accent">trekantsområdet</span>

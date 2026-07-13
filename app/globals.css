@@ -59,6 +59,8 @@ body {
   font-family: var(--font-brød);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* Undgå utilsigtet vandret scroll på mobil (lange ord/overlays) */
+  overflow-x: hidden;
 }
 
 /* Overskrifter — stærk grotesk, stram tracking */
