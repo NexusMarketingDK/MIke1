@@ -36,6 +36,21 @@ export const referencer: Reference[] = [
     ],
     ydelser: ["Kommunevagt", "Runderingsvagt", "Tryghedsvagt", "Portvagt"],
   },
+
+  // ─────────────────────────────────────────────────────────────
+  // TILFØJ FLERE REFERENCER HER:
+  // Kopiér blokken herunder, fjern de to // foran hver linje, og udfyld.
+  // ─────────────────────────────────────────────────────────────
+  // {
+  //   navn: "Kundens navn",
+  //   type: "Kunde", // fx "Kunde" / "Samarbejdspartner" / "Offentlig kunde"
+  //   resume: "Kort sætning om opgaven.",
+  //   beskrivelse: [
+  //     "Første afsnit: hvad gik opgaven ud på?",
+  //     "Andet afsnit: hvordan løste vi den?",
+  //   ],
+  //   ydelser: ["Byggepladsvagt", "Runderingsvagt"], // vagtformer brugt
+  // },
 ];
 
 // Eksempler på typiske opgaver (uden navngivne kunder — repræsentative).
@@ -82,4 +97,14 @@ export const opgaveEksempler: OpgaveEksempel[] = [
     beskrivelse:
       "Tryghedsskabende tilstedeværelse og rolig konflikthåndtering på et bosted i tæt samarbejde med stedets personale.",
   },
+
+  // ─────────────────────────────────────────────────────────────
+  // TILFØJ FLERE EKSEMPLER HER:
+  // Kopiér blokken herunder, fjern de to // foran hver linje, og udfyld.
+  // ─────────────────────────────────────────────────────────────
+  // {
+  //   titel: "Kort titel på opgaven",
+  //   ydelse: "Byggepladsvagt", // hvilken vagtform
+  //   beskrivelse: "1-2 sætninger om opgaven (uden opdigtede tal eller kundenavne).",
+  // },
 ];
