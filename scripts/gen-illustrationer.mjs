@@ -166,9 +166,20 @@ const scener = {
 
       <rect width="${W}" height="${H}" fill="url(#himmelH)"/>
       <rect width="${W}" height="${jord}" fill="url(#maaneglodH)"/>
-      <!-- Måne -->
+      <!-- Måne med halo og kratere -->
+      <circle cx="${W * 0.72}" cy="${H * 0.26}" r="${H * 0.085}" fill="none" stroke="#bfe0f0" stroke-width="1.5" opacity="0.18"/>
       <circle cx="${W * 0.72}" cy="${H * 0.26}" r="${H * 0.05}" fill="#e8f2f8"/>
       <circle cx="${W * 0.72}" cy="${H * 0.26}" r="${H * 0.05}" fill="#0e2436" opacity="0.12"/>
+      <circle cx="${W * 0.712}" cy="${H * 0.245}" r="${H * 0.009}" fill="#c3d4de" opacity="0.7"/>
+      <circle cx="${W * 0.729}" cy="${H * 0.272}" r="${H * 0.006}" fill="#c3d4de" opacity="0.6"/>
+      <circle cx="${W * 0.735}" cy="${H * 0.252}" r="${H * 0.004}" fill="#c3d4de" opacity="0.5"/>
+      <!-- Drivende natte-skyer -->
+      <g filter="url(#slørH)">
+        <ellipse cx="${W * 0.3}" cy="${H * 0.18}" rx="${W * 0.16}" ry="${H * 0.025}" fill="#0a1626" opacity="0.55"/>
+        <ellipse cx="${W * 0.62}" cy="${H * 0.31}" rx="${W * 0.2}" ry="${H * 0.02}" fill="#0a1626" opacity="0.45"/>
+        <ellipse cx="${W * 0.85}" cy="${H * 0.14}" rx="${W * 0.12}" ry="${H * 0.018}" fill="#0a1626" opacity="0.5"/>
+        <ellipse cx="${W * 0.66}" cy="${H * 0.24}" rx="${W * 0.13}" ry="${H * 0.014}" fill="#dfe9f2" opacity="0.06"/>
+      </g>
       <!-- Stjerner (varieret) -->
       ${[...Array(90)].map((_, i) => {
         const x = (i * 149) % W;
@@ -185,6 +196,12 @@ const scener = {
           return `<rect x="${i * bw}" y="${jord * 0.62 - bh}" width="${bw + 1}" height="${bh + jord * 0.4}"/>`;
         }).join("")}
       </g>
+      <!-- Fjerne, varme bylys i skyline -->
+      ${[...Array(26)].map((_, i) => {
+        const x = ((i * 211) % W);
+        const y = jord * 0.62 + ((i * 37) % (jord * 0.1));
+        return `<rect x="${x}" y="${y}" width="3" height="4" fill="#ffcf87" opacity="${0.25 + (i % 4) * 0.12}"/>`;
+      }).join("")}
 
       <!-- Kraner med advarselslys -->
       ${kran(W * 0.16, jord, H * 0.56, W * 0.22, 1)}
@@ -252,6 +269,18 @@ const scener = {
         const y = jord - H * (0.05 + ((i * 7) % 30) / 100);
         return `<circle cx="${x}" cy="${y}" r="${(i % 3) * 0.6 + 0.6}" fill="#ffcf87" opacity="${0.15 + (i % 4) * 0.12}"/>`;
       }).join("")}
+
+      <!-- Uskarpt forgrunds-hegn (filmisk dybdeskarphed) -->
+      <g filter="url(#slørH)" opacity="0.7">
+        <g transform="translate(0,${H * 0.86})">
+          ${hegn(0, 0, W, H * 0.16, 0.9)}
+        </g>
+      </g>
+      <linearGradient id="bundfadeH" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#04070b" stop-opacity="0"/>
+        <stop offset="1" stop-color="#04070b" stop-opacity="0.85"/>
+      </linearGradient>
+      <rect y="${H * 0.86}" width="${W}" height="${H * 0.14}" fill="url(#bundfadeH)"/>
 
       ${vignet(0.62)}${korn(0.05)}
     `);
