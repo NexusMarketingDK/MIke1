@@ -63,54 +63,74 @@ export async function sendKontakt(
   }
 
   const d = resultat.data;
-
-  // Mail SKAL kunne sendes — ellers må vi ikke lade som om henvendelsen er
-  // modtaget (så tabes leads i stilhed). Uden RESEND_API_KEY henviser vi
-  // tydeligt til telefon og e-mail i stedet.
-  const apiNoegle = process.env.RESEND_API_KEY;
-  if (!apiNoegle) {
-    console.error(
-      "KONTAKTFORMULAR: RESEND_API_KEY mangler — henvendelsen blev IKKE sendt som mail."
-    );
-    return {
-      ok: false,
-      besked: `Formularen kan ikke sende lige nu. Ring til os på ${virksomhed.telefon.visning} eller skriv til ${byggEmail()} — så vender vi hurtigt tilbage.`,
-    };
-  }
+  const modtager = process.env.KONTAKT_MODTAGER || byggEmail();
+  const emne = `Ny henvendelse: ${d.opgavetype} — ${d.navn}`;
+  const tekst = [
+    `Navn: ${d.navn}`,
+    `Firma: ${d.firma || "-"}`,
+    `Telefon: ${d.telefon}`,
+    `E-mail: ${d.email}`,
+    `Opgavetype: ${d.opgavetype}`,
+    `Lokation: ${d.lokation || "-"}`,
+    `Startdato: ${d.startdato || "-"}`,
+    "",
+    "Besked:",
+    d.besked,
+  ].join("\n");
 
   try {
-    const resend = new Resend(apiNoegle);
-    const modtager = process.env.KONTAKT_MODTAGER || byggEmail();
-    const { error } = await resend.emails.send({
-      from: process.env.KONTAKT_AFSENDER || "MT Vagt <info@mtvagt.dk>",
-      to: modtager,
-      replyTo: d.email,
-      subject: `Ny henvendelse: ${d.opgavetype} — ${d.navn}`,
-      text: [
-        `Navn: ${d.navn}`,
-        `Firma: ${d.firma || "-"}`,
-        `Telefon: ${d.telefon}`,
-        `E-mail: ${d.email}`,
-        `Opgavetype: ${d.opgavetype}`,
-        `Lokation: ${d.lokation || "-"}`,
-        `Startdato: ${d.startdato || "-"}`,
-        "",
-        "Besked:",
-        d.besked,
-      ].join("\n"),
-    });
-    if (error) {
-      console.error("KONTAKTFORMULAR: Resend afviste mailen:", error);
-      return {
-        ok: false,
-        besked: `Der opstod en fejl. Ring venligst til os på ${virksomhed.telefon.visning}.`,
-      };
+    if (process.env.RESEND_API_KEY) {
+      // Foretrukken: Resend (kræver API-nøgle + verificeret domæne).
+      const resend = new Resend(process.env.RESEND_API_KEY);
+      const { error } = await resend.emails.send({
+        from: process.env.KONTAKT_AFSENDER || "MT Vagt <info@mtvagt.dk>",
+        to: modtager,
+        replyTo: d.email,
+        subject: emne,
+        text: tekst,
+      });
+      if (error) throw new Error(`Resend: ${JSON.stringify(error)}`);
+    } else {
+      // Fallback der virker UDEN opsætning: FormSubmit sender mailen til
+      // modtageren. Første henvendelse udløser en engangs-bekræftelsesmail,
+      // som modtageren skal klikke ja til — derefter kommer alle mails frem.
+      const svar = await fetch(
+        `https://formsubmit.co/ajax/${encodeURIComponent(modtager)}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            _subject: emne,
+            _replyto: d.email,
+            _captcha: "false",
+            _template: "table",
+            Navn: d.navn,
+            Firma: d.firma || "-",
+            Telefon: d.telefon,
+            "E-mail": d.email,
+            Opgavetype: d.opgavetype,
+            Lokation: d.lokation || "-",
+            Startdato: d.startdato || "-",
+            Besked: d.besked,
+          }),
+        }
+      );
+      if (!svar.ok) throw new Error(`FormSubmit svarede ${svar.status}`);
+      const j = (await svar.json().catch(() => null)) as
+        | { success?: string | boolean }
+        | null;
+      if (j && String(j.success) === "false") {
+        throw new Error("FormSubmit afviste henvendelsen");
+      }
     }
   } catch (e) {
     console.error("KONTAKTFORMULAR: fejl ved afsendelse:", e);
     return {
       ok: false,
-      besked: `Der opstod en fejl. Ring venligst til os på ${virksomhed.telefon.visning}.`,
+      besked: `Der opstod en fejl. Ring venligst til os på ${virksomhed.telefon.visning} eller skriv til ${byggEmail()}.`,
     };
   }
 
