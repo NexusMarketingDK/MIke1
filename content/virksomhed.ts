@@ -22,7 +22,7 @@ export const virksomhed = {
     kald: "+4531314428",
   },
   // E-mailen bygges i klienten af dele for at beskytte mod spam-robotter.
-  emailDele: ["kontakt", "mtvagt.dk"],
+  emailDele: ["info", "mtvagt.dk"],
   // Primært fokusområde (bruges i sætninger om nærområdet).
   region: "trekantsområdet",
   // Bredt dækningsområde: hele landet + Malmö, men med hovedfokus på trekantsområdet.

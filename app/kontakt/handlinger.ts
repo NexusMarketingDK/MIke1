@@ -71,7 +71,7 @@ export async function sendKontakt(
       const resend = new Resend(apiNoegle);
       const modtager = process.env.KONTAKT_MODTAGER || byggEmail();
       await resend.emails.send({
-        from: process.env.KONTAKT_AFSENDER || "MT Vagt <kontakt@mtvagt.dk>",
+        from: process.env.KONTAKT_AFSENDER || "MT Vagt <info@mtvagt.dk>",
         to: modtager,
         replyTo: d.email,
         subject: `Ny henvendelse: ${d.opgavetype} — ${d.navn}`,
