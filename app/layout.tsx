@@ -25,11 +25,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://mtvagt.dk"),
   title: {
-    default: "MT Vagt — Autoriseret vagtselskab i Middelfart & trekantsområdet",
+    default: "MT Vagt — Autoriseret vagtselskab i Fredericia & trekantsområdet",
     template: "%s | MT Vagt",
   },
   description:
-    "MT Vagt & Vikarservice ApS er et autoriseret vagtselskab i Middelfart med ekspertise i hele Danmark og Malmö — hovedfokus på trekantsområdet. Byggepladsvagt, runderingsvagt, portvagt og mere. Døgnvagt.",
+    "MT Vagt & Vikarservice ApS er et autoriseret vagtselskab i Fredericia med ekspertise i hele Danmark — hovedfokus på trekantsområdet. Byggepladsvagt, runderingsvagt, portvagt og mere. Døgnvagt.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",

@@ -7,9 +7,9 @@ import { SeoSektion } from "@/components/SeoSektion";
 import { CtaBaand } from "@/components/CtaBaand";
 
 export const metadata: Metadata = {
-  title: "Om MT Vagt — autoriseret vagtselskab i Middelfart",
+  title: "Om MT Vagt — autoriseret vagtselskab i Fredericia",
   description:
-    "Lær MT Vagt at kende: et autoriseret vagtselskab i Middelfart, der løser vagtopgaver efter høj standard i hele trekantsområdet. Døgnvagt · Tillid · Tryghed.",
+    "Lær MT Vagt at kende: et autoriseret vagtselskab i Fredericia, der løser vagtopgaver efter høj standard i hele trekantsområdet. Døgnvagt · Tillid · Tryghed.",
   alternates: { canonical: "/om-mtvagt" },
 };
 
@@ -105,7 +105,7 @@ export default function OmSide() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
               { k: "Base", v: virksomhed.base },
-              { k: "Dækning", v: "Hele Danmark og Malmö" },
+              { k: "Dækning", v: "Hele Danmark" },
               { k: "CVR", v: virksomhed.cvr },
               { k: "Medlemskab", v: "VSL · ISO-certificeret" },
             ].map((f) => (
@@ -124,14 +124,14 @@ export default function OmSide() {
       <SeoSektion
         overskrift="Et autoriseret vagtselskab med rod i trekantsområdet"
         afsnit={[
-          "MT Vagt & Vikarservice ApS er et autoriseret vagtselskab med base i Middelfart. Vores mål er enkelt: at skabe tryghed for vores kunder ved at løse hver opgave efter høj standard. Vi har ekspertise i hele Danmark og Malmö — med hovedfokus på trekantsområdet (Fredericia, Kolding, Vejle og Odense) — og hjælper både private virksomheder, entreprenører, boligselskaber, foreninger og den offentlige sektor.",
+          "MT Vagt & Vikarservice ApS er et autoriseret vagtselskab med base i Taulov ved Fredericia. Vores mål er enkelt: at skabe tryghed for vores kunder ved at løse hver opgave efter høj standard. Vi har ekspertise i hele Danmark — med hovedfokus på trekantsområdet (Fredericia, Kolding, Vejle og Odense) — og hjælper både private virksomheder, entreprenører, boligselskaber, foreninger og den offentlige sektor.",
           "For os er autorisationen ikke en formalitet, men fundamentet under alt, hvad vi gør. Alt vores personale er vagtuddannet, sikkerhedsgodkendt af danske myndigheder og godkendt til at arbejde under vagtloven. Alle vagter bærer legitimationskort udstedt af Rigspolitiet, kan yde førstehjælp og betjene hjertestarter. Vi er ISO-certificeret og medlem af VSL. Et autoriseret vagtselskab er din garanti for, at opgaven ikke løses af amatører.",
           "Vi stræber ikke efter at blive de største i branchen. Til gengæld sætter vi en ære i at være tæt på vores kunder, kende vores område og løse opgaven ordentligt – hver gang. Døgnvagt, tillid og tryghed er ikke bare ord for os, men den måde vi arbejder på.",
         ]}
         faq={[
           {
             spoergsmaal: "Hvor har MT Vagt base?",
-            svar: "Vi har base på Østergade 12, 5500 Middelfart, midt i trekantsområdet på Fyn.",
+            svar: "Vi har base på Taulov Kirkevej 33, 7000 Fredericia, midt i trekantsområdet på Fyn.",
           },
           {
             spoergsmaal: "Hvilke kunder arbejder I for?",

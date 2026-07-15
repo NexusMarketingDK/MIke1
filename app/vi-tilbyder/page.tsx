@@ -84,14 +84,14 @@ export default function YdelserOversigt() {
       <SeoSektion
         overskrift="Autoriseret vagtselskab i trekantsområdet"
         afsnit={[
-          "MT Vagt & Vikarservice ApS er et autoriseret vagtselskab med base i Middelfart på Fyn. Vi dækker hele trekantsområdet – Fredericia, Kolding, Vejle og Odense – med vagtløsninger til både private virksomheder, entreprenører, boligselskaber og den offentlige sektor. Uanset om du har brug for en byggepladsvagt, en runderingsvagt, en portvagt eller en tryghedsvagt, løser vi opgaven efter høj standard.",
+          "MT Vagt & Vikarservice ApS er et autoriseret vagtselskab med base i Taulov ved Fredericia. Vi dækker hele trekantsområdet – Fredericia, Kolding, Vejle og Odense – med vagtløsninger til både private virksomheder, entreprenører, boligselskaber og den offentlige sektor. Uanset om du har brug for en byggepladsvagt, en runderingsvagt, en portvagt eller en tryghedsvagt, løser vi opgaven efter høj standard.",
           "Autorisationen er din garanti for kvalitet. Alt vores personale er vagtuddannet, sikkerhedsgodkendt af danske myndigheder og godkendt til at arbejde under vagtloven. Alle vagter bærer legitimationskort udstedt af Rigspolitiet, kan yde førstehjælp og betjene hjertestarter. Vi er ISO-certificeret og medlem af VSL. Et autoriseret vagtselskab er din garanti for, at opgaven ikke løses af amatører.",
           "Vi stræber ikke efter at blive de største i branchen, men vi sætter en ære i at løse alle opgaver efter høj standard. Ring til os for en uforpligtende snak om, hvordan vi bedst skaber tryghed for dig – hele døgnet.",
         ]}
         faq={[
           {
             spoergsmaal: "Hvilke områder dækker MT Vagt?",
-            svar: "Vi har base i Middelfart og dækker hele Danmark og Malmö med hovedfokus på trekantsområdet, herunder Fredericia, Kolding, Vejle og Odense.",
+            svar: "Vi har base i Taulov ved Fredericia og dækker hele Danmark med hovedfokus på trekantsområdet, herunder Fredericia, Kolding, Vejle og Odense.",
           },
           {
             spoergsmaal: "Er MT Vagt et autoriseret vagtselskab?",

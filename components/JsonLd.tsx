@@ -25,9 +25,8 @@ export function localBusinessLd() {
     taxID: virksomhed.cvr,
     areaServed: [
       { "@type": "Country", name: "Danmark" },
-      { "@type": "City", name: "Malmö", address: { "@type": "PostalAddress", addressCountry: "SE" } },
       ...virksomhed.daekning
-        .filter((by) => by !== "Malmö" && by !== "Hele Danmark")
+        .filter((by) => by !== "Hele Danmark")
         .map((by) => ({ "@type": "City", name: by })),
     ],
     address: {

@@ -4,12 +4,12 @@ import { useState } from "react";
 import { Afsloer } from "@/components/Sektion";
 
 // Stiliseret dækningskort over trekantsområdet + Fyn med pulserende radius
-// fra Middelfart. Positioner er tilnærmede og til illustration.
+// fra basen i Taulov ved Fredericia. Positioner er tilnærmede og til illustration.
 type By = { navn: string; x: number; y: number; base?: boolean; ramme: string };
 
 const byer: By[] = [
-  { navn: "Middelfart", x: 340, y: 210, base: true, ramme: "Vores base — centralt i trekantsområdet." },
-  { navn: "Fredericia", x: 250, y: 190, ramme: "Kort afstand — hurtig respons." },
+  { navn: "Fredericia", x: 250, y: 190, base: true, ramme: "Vores base i Taulov — centralt i trekantsområdet." },
+  { navn: "Middelfart", x: 340, y: 210, ramme: "Kort afstand — hurtig respons." },
   { navn: "Kolding", x: 205, y: 245, ramme: "En del af vores kerneområde." },
   { navn: "Vejle", x: 210, y: 140, ramme: "Nord i trekantsområdet." },
   { navn: "Odense", x: 470, y: 235, ramme: "Fyn — vi dækker hele øen." },
@@ -26,15 +26,12 @@ export function DaekningsKort() {
             Dækningsområde
           </p>
           <h2 className="mt-4 text-4xl font-extrabold tracking-tight text-krom sm:text-5xl">
-            Ekspertise i hele Danmark og Malmö
+            Trekantsområdet er vores hjemmebane
           </h2>
           <p className="mt-4 text-lg text-staal-lys">
-            Fra vores base i Middelfart løser vi vagtopgaver i hele Danmark og Malmö —
-            med hovedfokus på trekantsområdet, hvor vi rykker hurtigst ud, døgnet
-            rundt. Vælg en by for at se, hvordan vi dækker.
-          </p>
-          <p className="mt-3 text-sm text-staal">
-            Også opgaver i bl.a. København, Aarhus, Aalborg, Esbjerg og Malmö.
+            Fra vores base i Taulov ved Fredericia dækker vi hele trekantsområdet
+            med hurtig respons — døgnet rundt. Vi løser også opgaver i resten af
+            Danmark. Vælg en by for at se, hvordan vi dækker.
           </p>
           <ul className="mt-8 flex flex-wrap gap-2">
             {byer.map((b) => (
@@ -70,7 +67,7 @@ export function DaekningsKort() {
               viewBox="0 0 600 380"
               className="w-full"
               role="img"
-              aria-label="Kort over MT Vagts kerneområde i trekantsområdet — vi dækker desuden hele Danmark og Malmö"
+              aria-label="Kort over MT Vagts kerneområde i trekantsområdet — vi dækker desuden hele Danmark"
             >
               <defs>
                 <radialGradient id="hav" cx="50%" cy="40%">
@@ -86,7 +83,7 @@ export function DaekningsKort() {
                 stroke="#232c37"
                 strokeWidth="1.5"
               />
-              {/* Radius-puls fra Middelfart */}
+              {/* Radius-puls fra basen (Fredericia/Taulov) */}
               {[0, 1, 2].map((i) => (
                 <circle
                   key={i}

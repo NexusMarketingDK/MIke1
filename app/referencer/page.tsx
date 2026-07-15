@@ -9,7 +9,7 @@ import { CtaBaand } from "@/components/CtaBaand";
 export const metadata: Metadata = {
   title: "Referencer — opgaver for kunder og samarbejdspartnere",
   description:
-    "Se eksempler på MT Vagts opgaver — fra byggepladsvagt og rundering til kommunevagt. Autoriseret dansk vagtfirma med ekspertise i hele Danmark og Malmö.",
+    "Se eksempler på MT Vagts opgaver — fra byggepladsvagt og rundering til kommunevagt. Autoriseret dansk vagtfirma med ekspertise i hele Danmark.",
   alternates: { canonical: "/referencer" },
 };
 
@@ -147,7 +147,7 @@ export default function ReferencerSide() {
         afsnit={[
           "MT Vagt & Vikarservice ApS løser vagtopgaver for både private virksomheder, entreprenører, boligselskaber, samarbejdspartnere i sikkerhedsbranchen og den offentlige sektor. Uanset opgavens størrelse løser vi den efter høj standard — det er kernen i vores arbejde og grunden til, at kunder vender tilbage.",
           "Som autoriseret dansk vagtselskab er alt vores personale vagtuddannet, sikkerhedsgodkendt af danske myndigheder og godkendt til at arbejde under vagtloven. Alle vagter bærer legitimationskort udstedt af Rigspolitiet, kan yde førstehjælp og betjene hjertestarter. Vi er ISO-certificeret og medlem af VSL — din garanti for, at opgaven ikke løses af amatører.",
-          "Vi har base i Middelfart og ekspertise i hele Danmark og Malmö, med hovedfokus på trekantsområdet. Vil du høre mere om, hvordan vi kan løse netop din opgave, så ring til os på " +
+          "Vi har base i Taulov ved Fredericia og ekspertise i hele Danmark, med hovedfokus på trekantsområdet. Vil du høre mere om, hvordan vi kan løse netop din opgave, så ring til os på " +
             virksomhed.telefon.visning +
             " for en uforpligtende snak.",
         ]}

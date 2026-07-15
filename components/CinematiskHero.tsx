@@ -103,7 +103,7 @@ export function CinematiskHero() {
         <div className="max-w-3xl">
           <span className="inline-flex items-center gap-2 rounded-full border border-linje bg-ink-2/60 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-staal-lys backdrop-blur">
             <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-            Autoriseret vagtselskab · Middelfart
+            Autoriseret vagtselskab · Fredericia
           </span>
 
           <h1 className="mt-6 text-balance text-[2rem] font-extrabold leading-[1.05] tracking-tight text-krom [overflow-wrap:anywhere] sm:text-5xl sm:leading-[0.98] md:text-6xl lg:text-7xl">
@@ -135,7 +135,7 @@ export function CinematiskHero() {
           <ul className="mt-12 flex flex-wrap gap-x-6 gap-y-3 text-sm text-staal-lys">
             {[
               "Autoriseret af myndighederne",
-              "Hele Danmark & Malmö",
+              "Hele Danmark",
               "ISO-certificeret",
               "Medlem af VSL",
               "Rigspolitiets legitimationskort",

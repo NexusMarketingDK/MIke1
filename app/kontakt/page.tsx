@@ -156,7 +156,7 @@ export default function KontaktSide() {
             virksomhed.telefon.visning +
             " eller udfyld formularen, så vender vi hurtigt tilbage med et uforpligtende tilbud.",
           "Vi tager små som store opgaver. Uanset om du skal bruge en enkelt runderingsvagt en enkelt nat, en fast portvagt til en byggeplads over flere måneder, eller en større løsning til den offentlige sektor, løser vi opgaven efter høj standard. Som autoriseret vagtselskab er alt personale vagtuddannet, sikkerhedsgodkendt af danske myndigheder og bærer legitimationskort udstedt af Rigspolitiet — din garanti for, at opgaven ikke løses af amatører.",
-          "Vi dækker hele Danmark og Malmö med hovedfokus på trekantsområdet med base i Middelfart, herunder Fredericia, Kolding, Vejle og Odense — døgnet rundt. Har du et akut behov, rykker vi hurtigt ud. Kontakt os for en uforpligtende snak om din vagtopgave, så finder vi den rigtige løsning og pris sammen.",
+          "Vi dækker hele Danmark med hovedfokus på trekantsområdet med base i Taulov ved Fredericia, herunder Fredericia, Kolding, Vejle og Odense — døgnet rundt. Har du et akut behov, rykker vi hurtigt ud. Kontakt os for en uforpligtende snak om din vagtopgave, så finder vi den rigtige løsning og pris sammen.",
         ]}
         faq={[
           {
@@ -184,7 +184,7 @@ export default function KontaktSide() {
           {
             spoergsmaal: "Hvilke områder dækker I?",
             svar:
-              "Vi har base i Middelfart og dækker hele Danmark og Malmö med hovedfokus på trekantsområdet — herunder Fredericia, Kolding, Vejle og Odense — døgnet rundt.",
+              "Vi har base i Taulov ved Fredericia og dækker hele Danmark med hovedfokus på trekantsområdet — herunder Fredericia, Kolding, Vejle og Odense — døgnet rundt.",
           },
         ]}
       />

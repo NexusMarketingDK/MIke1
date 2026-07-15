@@ -31,7 +31,7 @@ export const referencer: Reference[] = [
     resume:
       "Vagt- og tryghedsopgaver i den offentlige sektor lokalt.",
     beskrivelse: [
-      "Som lokalt forankret vagtselskab med base i Middelfart løser MT Vagt vagtopgaver for den offentlige sektor. Opgaverne kan omfatte tilsyn, tryghed og bevogtning på kommunale anlæg og lokationer — altid med diskret, servicemindet og myndighedsgodkendt personale.",
+      "Som lokalt forankret vagtselskab med base i Taulov ved Fredericia løser MT Vagt vagtopgaver for den offentlige sektor. Opgaverne kan omfatte tilsyn, tryghed og bevogtning på kommunale anlæg og lokationer — altid med diskret, servicemindet og myndighedsgodkendt personale.",
       "Arbejde i det offentlige stiller høje krav til ordentlighed, dokumentation og respekt i mødet med borgerne. Alt vores personale er vagtuddannet og sikkerhedsgodkendt, og kommunevagt er en naturlig del af vores arbejde.",
     ],
     ydelser: ["Kommunevagt", "Runderingsvagt", "Tryghedsvagt", "Portvagt"],

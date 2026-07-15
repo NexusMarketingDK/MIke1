@@ -22,7 +22,7 @@ export const ydelseIndhold: Record<string, YdelseIndhold> = {
     seoAfsnit: [
       "Byggepladser er blandt de sværeste steder at sikre mekanisk. Åbne arealer, skiftende hegn, midlertidige adgangsveje og store mængder værdifuldt materiel gør pladsen til et oplagt mål for tyveri og hærværk – især uden for arbejdstid, i weekender og hen over ferieperioder. En synlig byggepladsvagt fra MT Vagt reducerer risikoen markant og signalerer med det samme, at pladsen er bevogtet.",
       "Vi tilpasser løsningen til byggeriets fase og risiko. Det kan være fast vagt om natten, planlagte runderinger på skiftende tidspunkter eller adgangskontrol ved porten i myldretid. Vores vagter er trænede i at opdage brand, tekniske fejl og uregelmæssigheder tidligt, så små hændelser ikke udvikler sig til dyre forsinkelser. Efter hver vagt får du en klar rapportering, så du altid ved, hvad der er sket på pladsen.",
-      "MT Vagt er et autoriseret vagtselskab med base i Middelfart og dækker hele trekantsområdet – Fredericia, Kolding, Vejle og Odense. Alt personale er vagtuddannet, sikkerhedsgodkendt og bærer vagt-legitimationskort udstedt af Rigspolitiet. Skal du bruge en byggepladsvagt på Fyn eller i trekantsområdet, så ring til os for en uforpligtende vurdering af opgaven.",
+      "MT Vagt er et autoriseret vagtselskab med base i Taulov ved Fredericia og dækker hele trekantsområdet – Fredericia, Kolding, Vejle og Odense. Alt personale er vagtuddannet, sikkerhedsgodkendt og bærer vagt-legitimationskort udstedt af Rigspolitiet. Skal du bruge en byggepladsvagt på Fyn eller i trekantsområdet, så ring til os for en uforpligtende vurdering af opgaven.",
     ],
     faq: [
       {
@@ -35,7 +35,7 @@ export const ydelseIndhold: Record<string, YdelseIndhold> = {
       },
       {
         spoergsmaal: "Dækker I hele trekantsområdet?",
-        svar: "Ja. Vi har base i Middelfart og dækker hele Danmark og Malmö med hovedfokus på trekantsområdet, herunder Fredericia, Kolding, Vejle og Odense.",
+        svar: "Ja. Vi har base i Taulov ved Fredericia og dækker hele Danmark med hovedfokus på trekantsområdet, herunder Fredericia, Kolding, Vejle og Odense.",
       },
       {
         spoergsmaal: "Er jeres vagter autoriserede?",
@@ -59,7 +59,7 @@ export const ydelseIndhold: Record<string, YdelseIndhold> = {
     seoAfsnit: [
       "En runderingsvagt fører tilsyn med din ejendom, virksomhed eller byggeplads uden for normal åbningstid. I stedet for fast tilstedeværelse kører vagten planlagte runder på skiftende tidspunkter, så et fast mønster ikke kan udnyttes. Det er en omkostningseffektiv måde at holde øje med flere adresser og skabe tryghed, uden at der skal stå en vagt fast hele natten.",
       "Under hver runde er vagten opmærksom på brand, indbrud, hærværk og tekniske uregelmæssigheder – for eksempel åbne døre, vandskader, utætheder eller fejl på installationer. Tidlig opdagelse betyder, at problemer kan stoppes, før de bliver dyre. Vores vagter kan yde førstehjælp og betjene hjertestarter, og de dokumenterer hver runde, så du har fuldt overblik.",
-      "MT Vagt er et autoriseret vagtselskab i Middelfart, der dækker hele Danmark og Malmö med hovedfokus på trekantsområdet. Vil du have tilsyn med din bolig, virksomhed eller byggeplads i Fredericia, Kolding, Vejle eller Odense, så tilrettelægger vi en runderingsplan, der passer til din risiko og dit budget.",
+      "MT Vagt er et autoriseret vagtselskab i Fredericia, der dækker hele Danmark med hovedfokus på trekantsområdet. Vil du have tilsyn med din bolig, virksomhed eller byggeplads i Fredericia, Kolding, Vejle eller Odense, så tilrettelægger vi en runderingsplan, der passer til din risiko og dit budget.",
     ],
     faq: [
       {
@@ -92,7 +92,7 @@ export const ydelseIndhold: Record<string, YdelseIndhold> = {
     seoAfsnit: [
       "Portvagten er dit kontrolpunkt ved indgangen. På byggepladser, i kommuner og hos større virksomheder styrer den stationære vagt, hvem der kommer ind og ud – både personer og køretøjer. Det skaber sikkerhed, overblik og et professionelt førstehåndsindtryk for gæster, håndværkere og leverandører.",
       "Vores portvagter kombinerer kontrol med god service. De registrerer og legitimerer besøgende, håndhæver adgangs- og sikkerhedsregler, anviser parkering og tager imod leverancer. Med en fast vagt ved porten undgår du uautoriseret adgang, og du har altid et menneske, der kan reagere hurtigt og korrekt, hvis noget kræver handling.",
-      "MT Vagt er et autoriseret vagtselskab med base i Middelfart, der dækker hele Danmark og Malmö med hovedfokus på trekantsområdet. Har du behov for adgangskontrol i Fredericia, Kolding, Vejle eller Odense, tilpasser vi bemanding og procedurer til netop din lokation og dit sikkerhedsniveau.",
+      "MT Vagt er et autoriseret vagtselskab med base i Taulov ved Fredericia, der dækker hele Danmark med hovedfokus på trekantsområdet. Har du behov for adgangskontrol i Fredericia, Kolding, Vejle eller Odense, tilpasser vi bemanding og procedurer til netop din lokation og dit sikkerhedsniveau.",
     ],
     faq: [
       {
@@ -125,7 +125,7 @@ export const ydelseIndhold: Record<string, YdelseIndhold> = {
     seoAfsnit: [
       "Når uheldet er ude, tæller minutterne. En akut vagt fra MT Vagt rykker hurtigt ud og bevogter dit udstyr, dine bygninger og dine værdier, indtil situationen er under kontrol. Vi hjælper virksomheder, entreprenører, boligselskaber, foreninger, museer og hele den offentlige sektor med akut bevogtning døgnet rundt.",
       "Akutte behov opstår ved indbrud, hærværk, brand- eller vandskader, brudte ruder, defekte alarmer eller andre situationer, hvor et sted pludselig står åbent og uovervåget. Vores vagter sikrer stedet, forhindrer yderligere skade og tab, og kan yde førstehjælp og betjene hjertestarter, hvis der er brug for det.",
-      "MT Vagt er et autoriseret vagtselskab i Middelfart med døgndækning i hele trekantsområdet og på Fyn. Har du et akut vagtbehov i Fredericia, Kolding, Vejle eller Odense, så ring – vi handler hurtigt.",
+      "MT Vagt er et autoriseret vagtselskab i Fredericia med døgndækning i hele trekantsområdet og på Fyn. Har du et akut vagtbehov i Fredericia, Kolding, Vejle eller Odense, så ring – vi handler hurtigt.",
     ],
     faq: [
       {
@@ -158,7 +158,7 @@ export const ydelseIndhold: Record<string, YdelseIndhold> = {
     seoAfsnit: [
       "En servicevagt eller butiksvagt kombinerer sikkerhed med god service. I butik, varehus eller virksomhed skaber en synlig, venlig vagt tryghed for både kunder og medarbejdere – og forebygger svind, butikstyveri og uro, før det opstår. Effekten kommer i høj grad af selve tilstedeværelsen: en professionel vagt ændrer adfærd.",
       "Vores servicevagter er trænet i at aflæse situationer, håndtere konflikter roligt og gribe ind korrekt, når det er nødvendigt. De hjælper også gerne kunder til rette og understøtter personalet i hverdagen. Målet er en tryg og imødekommende oplevelse, hvor sikkerheden er til stede uden at være påtrængende.",
-      "MT Vagt er et autoriseret vagtselskab med base i Middelfart, der dækker hele Danmark og Malmö med hovedfokus på trekantsområdet. Skal du bruge en butiksvagt eller servicevagt i Fredericia, Kolding, Vejle eller Odense, finder vi en løsning, der matcher din butiks profil og behov.",
+      "MT Vagt er et autoriseret vagtselskab med base i Taulov ved Fredericia, der dækker hele Danmark med hovedfokus på trekantsområdet. Skal du bruge en butiksvagt eller servicevagt i Fredericia, Kolding, Vejle eller Odense, finder vi en løsning, der matcher din butiks profil og behov.",
     ],
     faq: [
       {
@@ -188,7 +188,7 @@ export const ydelseIndhold: Record<string, YdelseIndhold> = {
     seoAfsnit: [
       "Tryghed handler om mennesker. Vores tryghedsvagter skaber ro og sikkerhed i det offentlige rum, på bosteder og i psykiatriske miljøer – med respekt, tålmodighed og professionel konflikthåndtering. Målet er ikke at dominere, men at forebygge uro og skabe et trygt miljø for borgere, beboere og personale. Et tryggere Danmark starter med nærvær.",
       "Arbejdet med sårbare borgere kræver særlig erfaring og en rolig tilgang. Vores vagter samarbejder tæt med personale og myndigheder, aflæser situationer tidligt og deeskalerer, før konflikter optrappes. De kan yde førstehjælp og betjene hjertestarter og handler altid inden for rammerne af vagtloven.",
-      "MT Vagt er et autoriseret vagtselskab i Middelfart, der dækker hele Danmark og Malmö med hovedfokus på trekantsområdet. Har I brug for tryghedsvagter til et bosted, en institution eller det offentlige rum i Fredericia, Kolding, Vejle eller Odense, så tilrettelægger vi en løsning i tæt dialog med jer.",
+      "MT Vagt er et autoriseret vagtselskab i Fredericia, der dækker hele Danmark med hovedfokus på trekantsområdet. Har I brug for tryghedsvagter til et bosted, en institution eller det offentlige rum i Fredericia, Kolding, Vejle eller Odense, så tilrettelægger vi en løsning i tæt dialog med jer.",
     ],
     faq: [
       {
@@ -218,7 +218,7 @@ export const ydelseIndhold: Record<string, YdelseIndhold> = {
     seoAfsnit: [
       "En fastvagt er en dedikeret medarbejder, der er fast til stede på en bestemt adresse – dag, nat eller døgnet rundt. Det giver den højeste grad af tryghed og kontinuitet, fordi der altid er et menneske på stedet, som kender rutinerne, kan reagere øjeblikkeligt og skabe genkendelighed for medarbejdere, beboere og besøgende.",
       "Fastvagt er den rette løsning, når risikoen eller behovet for tilstedeværelse er konstant – for eksempel ved følsomme lokationer, i perioder med forhøjet risiko, ved store værdier eller hvor der er brug for løbende adgangskontrol og overblik. Vores vagter kan yde førstehjælp og betjene hjertestarter og dokumenterer deres vagt.",
-      "MT Vagt er et autoriseret vagtselskab med base i Middelfart, der dækker hele Danmark og Malmö med hovedfokus på trekantsområdet. Har du brug for en fastvagt i Fredericia, Kolding, Vejle eller Odense, skræddersyr vi opgaven, så bemanding og tidsrum passer præcist til dit behov.",
+      "MT Vagt er et autoriseret vagtselskab med base i Taulov ved Fredericia, der dækker hele Danmark med hovedfokus på trekantsområdet. Har du brug for en fastvagt i Fredericia, Kolding, Vejle eller Odense, skræddersyr vi opgaven, så bemanding og tidsrum passer præcist til dit behov.",
     ],
     faq: [
       {
@@ -248,7 +248,7 @@ export const ydelseIndhold: Record<string, YdelseIndhold> = {
     seoAfsnit: [
       "Den offentlige sektor har brug for vagtløsninger, der forener sikkerhed, tryghed og god borgerkontakt. MT Vagt løser vagtopgaver for kommuner og offentlige institutioner – bosteder, genbrugspladser, skoler og rådhuse – med diskret, servicemindet og myndighedsgodkendt personale. Det er en naturlig forlængelse af vores arbejde i det offentlige.",
       "Opgaverne spænder bredt: tryghed og konflikthåndtering på bosteder, adgangskontrol og orden på genbrugspladser, tilsyn og bevogtning af skoler og kommunale bygninger uden for åbningstid samt sikkerhed på rådhuse og ved offentlige arrangementer. Vi tilrettelægger løsningen i tæt dialog med jer og tilpasser bemanding, tidsrum og procedurer til jeres behov og rammer.",
-      "MT Vagt er et autoriseret vagtselskab i Middelfart, der dækker hele Danmark og Malmö med hovedfokus på trekantsområdet. Alt personale er vagtuddannet, sikkerhedsgodkendt og bærer legitimationskort fra Rigspolitiet. Skal jeres kommune eller institution i Fredericia, Kolding, Vejle eller Odense bruge en pålidelig vagtpartner, så tag fat i os.",
+      "MT Vagt er et autoriseret vagtselskab i Fredericia, der dækker hele Danmark med hovedfokus på trekantsområdet. Alt personale er vagtuddannet, sikkerhedsgodkendt og bærer legitimationskort fra Rigspolitiet. Skal jeres kommune eller institution i Fredericia, Kolding, Vejle eller Odense bruge en pålidelig vagtpartner, så tag fat i os.",
     ],
     faq: [
       {

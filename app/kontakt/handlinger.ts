@@ -64,36 +64,54 @@ export async function sendKontakt(
 
   const d = resultat.data;
 
-  // Send kun mail hvis Resend er konfigureret; ellers accepter pænt.
+  // Mail SKAL kunne sendes — ellers må vi ikke lade som om henvendelsen er
+  // modtaget (så tabes leads i stilhed). Uden RESEND_API_KEY henviser vi
+  // tydeligt til telefon og e-mail i stedet.
   const apiNoegle = process.env.RESEND_API_KEY;
-  if (apiNoegle) {
-    try {
-      const resend = new Resend(apiNoegle);
-      const modtager = process.env.KONTAKT_MODTAGER || byggEmail();
-      await resend.emails.send({
-        from: process.env.KONTAKT_AFSENDER || "MT Vagt <info@mtvagt.dk>",
-        to: modtager,
-        replyTo: d.email,
-        subject: `Ny henvendelse: ${d.opgavetype} — ${d.navn}`,
-        text: [
-          `Navn: ${d.navn}`,
-          `Firma: ${d.firma || "-"}`,
-          `Telefon: ${d.telefon}`,
-          `E-mail: ${d.email}`,
-          `Opgavetype: ${d.opgavetype}`,
-          `Lokation: ${d.lokation || "-"}`,
-          `Startdato: ${d.startdato || "-"}`,
-          "",
-          "Besked:",
-          d.besked,
-        ].join("\n"),
-      });
-    } catch {
+  if (!apiNoegle) {
+    console.error(
+      "KONTAKTFORMULAR: RESEND_API_KEY mangler — henvendelsen blev IKKE sendt som mail."
+    );
+    return {
+      ok: false,
+      besked: `Formularen kan ikke sende lige nu. Ring til os på ${virksomhed.telefon.visning} eller skriv til ${byggEmail()} — så vender vi hurtigt tilbage.`,
+    };
+  }
+
+  try {
+    const resend = new Resend(apiNoegle);
+    const modtager = process.env.KONTAKT_MODTAGER || byggEmail();
+    const { error } = await resend.emails.send({
+      from: process.env.KONTAKT_AFSENDER || "MT Vagt <info@mtvagt.dk>",
+      to: modtager,
+      replyTo: d.email,
+      subject: `Ny henvendelse: ${d.opgavetype} — ${d.navn}`,
+      text: [
+        `Navn: ${d.navn}`,
+        `Firma: ${d.firma || "-"}`,
+        `Telefon: ${d.telefon}`,
+        `E-mail: ${d.email}`,
+        `Opgavetype: ${d.opgavetype}`,
+        `Lokation: ${d.lokation || "-"}`,
+        `Startdato: ${d.startdato || "-"}`,
+        "",
+        "Besked:",
+        d.besked,
+      ].join("\n"),
+    });
+    if (error) {
+      console.error("KONTAKTFORMULAR: Resend afviste mailen:", error);
       return {
         ok: false,
         besked: `Der opstod en fejl. Ring venligst til os på ${virksomhed.telefon.visning}.`,
       };
     }
+  } catch (e) {
+    console.error("KONTAKTFORMULAR: fejl ved afsendelse:", e);
+    return {
+      ok: false,
+      besked: `Der opstod en fejl. Ring venligst til os på ${virksomhed.telefon.visning}.`,
+    };
   }
 
   return {

@@ -10,9 +10,9 @@ export const virksomhed = {
   garanti:
     "Et autoriseret vagtselskab er din garanti for, at opgaven ikke løses af amatører.",
   adresse: {
-    gade: "Østergade 12",
-    postnr: "5500",
-    by: "Middelfart",
+    gade: "Taulov Kirkevej 33",
+    postnr: "7000",
+    by: "Fredericia",
     land: "Danmark",
   },
   cvr: "44747340",
@@ -25,18 +25,17 @@ export const virksomhed = {
   emailDele: ["info", "mtvagt.dk"],
   // Primært fokusområde (bruges i sætninger om nærområdet).
   region: "trekantsområdet",
-  // Bredt dækningsområde: hele landet + Malmö, men med hovedfokus på trekantsområdet.
-  daekningBred: "hele Danmark og Malmö",
+  // Bredt dækningsområde: hele landet, med hovedfokus på trekantsområdet.
+  daekningBred: "hele Danmark",
   daekningSaetning:
-    "Vi har base i Middelfart og ekspertise i hele Danmark og Malmö — med hovedfokus på trekantsområdet.",
-  base: "Middelfart",
+    "Vi har base i Taulov ved Fredericia og ekspertise i hele Danmark — med hovedfokus på trekantsområdet.",
+  base: "Taulov ved Fredericia",
   daekning: [
-    "Middelfart",
     "Fredericia",
+    "Middelfart",
     "Kolding",
     "Vejle",
     "Odense",
-    "Malmö",
     "Hele Danmark",
   ],
   autorisation: {

@@ -9,7 +9,7 @@ import { SeoSektion } from "@/components/SeoSektion";
 export const metadata: Metadata = {
   title: "Ledige stillinger — bliv vagt hos MT Vagt",
   description:
-    "Vil du være vagt i trekantsområdet? Se hvordan du søger job hos MT Vagt — et autoriseret vagtselskab i Middelfart. Send en uopfordret ansøgning.",
+    "Vil du være vagt i trekantsområdet? Se hvordan du søger job hos MT Vagt — et autoriseret vagtselskab i Fredericia. Send en uopfordret ansøgning.",
   alternates: { canonical: "/ledige-stillinger" },
 };
 
@@ -94,7 +94,7 @@ export default function JobSide() {
       <SeoSektion
         overskrift="Job som vagt i trekantsområdet"
         afsnit={[
-          "Drømmer du om et job, hvor du gør en reel forskel for andres tryghed? Som vagt hos MT Vagt bliver du en del af et autoriseret vagtselskab, der løser opgaver efter høj standard i hele trekantsområdet – fra byggepladsvagt og rundering til port-, service- og tryghedsvagt. Vi har base i Middelfart og arbejder i og omkring Fredericia, Kolding, Vejle og Odense.",
+          "Drømmer du om et job, hvor du gør en reel forskel for andres tryghed? Som vagt hos MT Vagt bliver du en del af et autoriseret vagtselskab, der løser opgaver efter høj standard i hele trekantsområdet – fra byggepladsvagt og rundering til port-, service- og tryghedsvagt. Vi har base i Taulov ved Fredericia og arbejder i og omkring Fredericia, Kolding, Vejle og Odense.",
           "Vi lægger vægt på professionalisme, ansvarlighed og en ordentlig tilgang til mennesker. Alt personale skal kunne sikkerhedsgodkendes af myndighederne og arbejde inden for vagtloven. Vagtuddannelse og førstehjælp er en naturlig del af arbejdet, og har du det ikke på plads endnu, ser vi gerne, at du er indstillet på at få det.",
           "Vi ansætter løbende, når de rigtige folk melder sig. Send os derfor gerne en uopfordret ansøgning – også selv om du ikke ser en konkret stilling opslået lige nu. Fortæl os, hvem du er, og hvad du kan, så tager vi fat i dig, hvis der er et match.",
         ]}
@@ -109,7 +109,7 @@ export default function JobSide() {
           },
           {
             spoergsmaal: "Hvor arbejder jeg som vagt hos jer?",
-            svar: "Vi løser opgaver i hele trekantsområdet og på Fyn med base i Middelfart.",
+            svar: "Vi løser opgaver i hele trekantsområdet og på Fyn med base i Taulov ved Fredericia.",
           },
         ]}
       />

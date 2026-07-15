@@ -41,7 +41,7 @@ export default function OgBillede() {
               color: "#9aa2ab",
             }}
           >
-            Autoriseret vagtselskab · Middelfart
+            Autoriseret vagtselskab · Fredericia
           </div>
         </div>
 
