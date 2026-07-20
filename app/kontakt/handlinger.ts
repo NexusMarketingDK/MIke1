@@ -89,6 +89,11 @@ export async function sendKontakt(
     Besked: d.besked,
   };
 
+  // Web3Forms-nøgle (offentlig form-nøgle — trygt at ligge i koden).
+  // Kan overstyres med miljøvariablen WEB3FORMS_KEY i Vercel.
+  const web3key =
+    process.env.WEB3FORMS_KEY || "3aa15c7c-c1b7-4ef5-8064-992e65742c0c";
+
   try {
     if (process.env.RESEND_API_KEY) {
       // Foretrukken: Resend (kræver API-nøgle + verificeret domæne).
@@ -101,7 +106,7 @@ export async function sendKontakt(
         text: tekst,
       });
       if (error) throw new Error(`Resend: ${JSON.stringify(error)}`);
-    } else if (process.env.WEB3FORMS_KEY) {
+    } else if (web3key) {
       // Robust server-side afsendelse (ingen domæneverificering nødvendig).
       const svar = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
@@ -110,7 +115,7 @@ export async function sendKontakt(
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: process.env.WEB3FORMS_KEY,
+          access_key: web3key,
           subject: emne,
           from_name: "MT Vagt – kontaktformular",
           replyto: d.email,
