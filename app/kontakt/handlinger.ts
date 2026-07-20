@@ -78,6 +78,17 @@ export async function sendKontakt(
     d.besked,
   ].join("\n");
 
+  const felter = {
+    Navn: d.navn,
+    Firma: d.firma || "-",
+    Telefon: d.telefon,
+    "E-mail": d.email,
+    Opgavetype: d.opgavetype,
+    Lokation: d.lokation || "-",
+    Startdato: d.startdato || "-",
+    Besked: d.besked,
+  };
+
   try {
     if (process.env.RESEND_API_KEY) {
       // Foretrukken: Resend (kræver API-nøgle + verificeret domæne).
@@ -90,10 +101,30 @@ export async function sendKontakt(
         text: tekst,
       });
       if (error) throw new Error(`Resend: ${JSON.stringify(error)}`);
+    } else if (process.env.WEB3FORMS_KEY) {
+      // Robust server-side afsendelse (ingen domæneverificering nødvendig).
+      const svar = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: process.env.WEB3FORMS_KEY,
+          subject: emne,
+          from_name: "MT Vagt – kontaktformular",
+          replyto: d.email,
+          ...felter,
+        }),
+      });
+      const j = (await svar.json().catch(() => null)) as
+        | { success?: boolean; message?: string }
+        | null;
+      if (!svar.ok || !j?.success) {
+        throw new Error(`Web3Forms: ${svar.status} ${j?.message ?? ""}`);
+      }
     } else {
-      // Fallback der virker UDEN opsætning: FormSubmit sender mailen til
-      // modtageren. Første henvendelse udløser en engangs-bekræftelsesmail,
-      // som modtageren skal klikke ja til — derefter kommer alle mails frem.
+      // Sidste udvej uden opsætning: FormSubmit (kan blokere server-kald).
       const svar = await fetch(
         `https://formsubmit.co/ajax/${encodeURIComponent(modtager)}`,
         {
@@ -101,29 +132,22 @@ export async function sendKontakt(
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
+            "User-Agent": "Mozilla/5.0 (compatible; MTVagt/1.0)",
           },
           body: JSON.stringify({
             _subject: emne,
             _replyto: d.email,
             _captcha: "false",
             _template: "table",
-            Navn: d.navn,
-            Firma: d.firma || "-",
-            Telefon: d.telefon,
-            "E-mail": d.email,
-            Opgavetype: d.opgavetype,
-            Lokation: d.lokation || "-",
-            Startdato: d.startdato || "-",
-            Besked: d.besked,
+            ...felter,
           }),
         }
       );
-      if (!svar.ok) throw new Error(`FormSubmit svarede ${svar.status}`);
       const j = (await svar.json().catch(() => null)) as
         | { success?: string | boolean }
         | null;
-      if (j && String(j.success) === "false") {
-        throw new Error("FormSubmit afviste henvendelsen");
+      if (!svar.ok || (j && String(j.success) === "false")) {
+        throw new Error(`FormSubmit svarede ${svar.status}`);
       }
     }
   } catch (e) {
