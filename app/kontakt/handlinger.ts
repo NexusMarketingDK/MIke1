@@ -89,10 +89,10 @@ export async function sendKontakt(
     Besked: d.besked,
   };
 
-  // Web3Forms-nøgle (offentlig form-nøgle — trygt at ligge i koden).
-  // Kan overstyres med miljøvariablen WEB3FORMS_KEY i Vercel.
-  const web3key =
-    process.env.WEB3FORMS_KEY || "3aa15c7c-c1b7-4ef5-8064-992e65742c0c";
+  // Web3Forms-nøgle sættes som miljøvariabel WEB3FORMS_KEY i Vercel.
+  // (Ingen nøgle i koden — når du opretter en ny på web3forms.com, lægger
+  //  du den bare ind under Settings → Environment Variables og redeployer.)
+  const web3key = process.env.WEB3FORMS_KEY;
 
   try {
     if (process.env.RESEND_API_KEY) {
