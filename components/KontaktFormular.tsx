@@ -1,37 +1,78 @@
 "use client";
 
-import { useActionState } from "react";
-import { useFormStatus } from "react-dom";
-import { sendKontakt, type FormTilstand } from "@/app/kontakt/handlinger";
+import { useState } from "react";
 import { OPGAVETYPER } from "@/lib/kontakt-skema";
 
-const start: FormTilstand = { ok: false };
-
-function SendKnap() {
-  const { pending } = useFormStatus();
-  return (
-    <button
-      type="submit"
-      disabled={pending}
-      className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-accent-klar disabled:opacity-60"
-    >
-      {pending ? "Sender…" : "Send henvendelse"}
-    </button>
-  );
-}
-
-function Fejl({ tekst }: { tekst?: string }) {
-  if (!tekst) return null;
-  return <p className="mt-1 text-sm text-accent-klar">{tekst}</p>;
-}
+// Web3Forms access key (offentlig form-nøgle — trygt at ligge i klienten).
+// Kan overstyres med NEXT_PUBLIC_WEB3FORMS_KEY.
+const WEB3FORMS_KEY =
+  process.env.NEXT_PUBLIC_WEB3FORMS_KEY ||
+  "ffd8ba99-a00c-4535-9932-b7fc191a3c79";
 
 const inputKlasse =
   "w-full rounded-xl border border-linje bg-ink px-4 py-3 text-krom placeholder:text-staal focus:border-staal-lys";
 
-export function KontaktFormular() {
-  const [tilstand, action] = useActionState(sendKontakt, start);
+type Status = "idle" | "sender" | "ok" | "fejl";
 
-  if (tilstand.ok) {
+export function KontaktFormular() {
+  const [status, setStatus] = useState<Status>("idle");
+  const [fejlBesked, setFejlBesked] = useState("");
+
+  async function haandterSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+
+    // Honeypot — udfyldt = robot. Lad som om alt er ok.
+    if (fd.get("website")) {
+      setStatus("ok");
+      return;
+    }
+
+    setStatus("sender");
+    setFejlBesked("");
+
+    const payload = {
+      access_key: WEB3FORMS_KEY,
+      subject: `Ny henvendelse: ${fd.get("opgavetype")} — ${fd.get("navn")}`,
+      from_name: "MT Vagt – kontaktformular",
+      replyto: String(fd.get("email") || ""),
+      Navn: fd.get("navn"),
+      Firma: fd.get("firma") || "-",
+      Telefon: fd.get("telefon"),
+      "E-mail": fd.get("email"),
+      Opgavetype: fd.get("opgavetype"),
+      Lokation: fd.get("lokation") || "-",
+      Startdato: fd.get("startdato") || "-",
+      Besked: fd.get("besked"),
+    };
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json().catch(() => null);
+      if (res.ok && data?.success) {
+        form.reset();
+        setStatus("ok");
+      } else {
+        setStatus("fejl");
+        setFejlBesked(
+          data?.message ? String(data.message) : `Fejl (${res.status})`
+        );
+      }
+    } catch {
+      setStatus("fejl");
+      setFejlBesked("Netværksfejl — prøv igen, eller ring til os.");
+    }
+  }
+
+  if (status === "ok") {
     return (
       <div
         role="status"
@@ -40,17 +81,24 @@ export function KontaktFormular() {
         <div className="text-3xl" aria-hidden>
           ✓
         </div>
-        <h3 className="mt-3 text-xl font-bold text-krom">Tak for din henvendelse</h3>
-        <p className="mt-2 text-staal-lys">{tilstand.besked}</p>
+        <h3 className="mt-3 text-xl font-bold text-krom">
+          Tak for din henvendelse
+        </h3>
+        <p className="mt-2 text-staal-lys">
+          Vi vender tilbage hurtigst muligt. Haster det, så ring til os på +45
+          3131 4428.
+        </p>
       </div>
     );
   }
 
   return (
-    <form action={action} className="space-y-5" noValidate>
-      {tilstand.besked && !tilstand.ok && (
+    <form onSubmit={haandterSubmit} className="space-y-5">
+      {status === "fejl" && (
         <p className="rounded-xl border border-accent-dyb/60 bg-accent/10 px-4 py-3 text-sm text-accent-klar">
-          {tilstand.besked}
+          Der opstod en fejl. Ring venligst til os på +45 3131 4428 eller skriv
+          til info@mtvagt.dk.
+          {fejlBesked ? ` [${fejlBesked}]` : ""}
         </p>
       )}
 
@@ -68,14 +116,12 @@ export function KontaktFormular() {
             Navn *
           </label>
           <input id="navn" name="navn" required className={inputKlasse} />
-          <Fejl tekst={tilstand.fejl?.navn} />
         </div>
         <div>
           <label htmlFor="firma" className="mb-1.5 block text-sm text-staal-lys">
             Firma
           </label>
           <input id="firma" name="firma" className={inputKlasse} />
-          <Fejl tekst={tilstand.fejl?.firma} />
         </div>
         <div>
           <label htmlFor="telefon" className="mb-1.5 block text-sm text-staal-lys">
@@ -88,7 +134,6 @@ export function KontaktFormular() {
             required
             className={inputKlasse}
           />
-          <Fejl tekst={tilstand.fejl?.telefon} />
         </div>
         <div>
           <label htmlFor="email" className="mb-1.5 block text-sm text-staal-lys">
@@ -101,7 +146,6 @@ export function KontaktFormular() {
             required
             className={inputKlasse}
           />
-          <Fejl tekst={tilstand.fejl?.email} />
         </div>
         <div>
           <label
@@ -126,7 +170,6 @@ export function KontaktFormular() {
               </option>
             ))}
           </select>
-          <Fejl tekst={tilstand.fejl?.opgavetype} />
         </div>
         <div>
           <label htmlFor="lokation" className="mb-1.5 block text-sm text-staal-lys">
@@ -138,7 +181,6 @@ export function KontaktFormular() {
             placeholder="F.eks. Fredericia"
             className={inputKlasse}
           />
-          <Fejl tekst={tilstand.fejl?.lokation} />
         </div>
         <div className="sm:col-span-2">
           <label htmlFor="startdato" className="mb-1.5 block text-sm text-staal-lys">
@@ -151,7 +193,6 @@ export function KontaktFormular() {
             placeholder="F.eks. hurtigst muligt eller en dato"
             className={inputKlasse}
           />
-          <Fejl tekst={tilstand.fejl?.startdato} />
         </div>
         <div className="sm:col-span-2">
           <label htmlFor="besked" className="mb-1.5 block text-sm text-staal-lys">
@@ -165,12 +206,17 @@ export function KontaktFormular() {
             className={inputKlasse}
             placeholder="Fortæl kort om opgaven — hvad, hvor og hvornår."
           />
-          <Fejl tekst={tilstand.fejl?.besked} />
         </div>
       </div>
 
       <div className="flex flex-wrap items-center gap-4">
-        <SendKnap />
+        <button
+          type="submit"
+          disabled={status === "sender"}
+          className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-accent-klar disabled:opacity-60"
+        >
+          {status === "sender" ? "Sender…" : "Send henvendelse"}
+        </button>
         <p className="text-xs text-staal">
           Ved at sende accepterer du vores{" "}
           <a href="/privatlivs-politik" className="underline hover:text-krom">
