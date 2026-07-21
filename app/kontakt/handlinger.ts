@@ -113,12 +113,18 @@ export async function sendKontakt(
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
+          // Browser-agtige headers, så kaldet ikke afvises (403) som bot.
+          "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36",
+          Origin: "https://mtvagt.dk",
+          Referer: "https://mtvagt.dk/kontakt",
         },
         body: JSON.stringify({
           access_key: web3key,
           subject: emne,
           from_name: "MT Vagt – kontaktformular",
           replyto: d.email,
+          botcheck: false,
           ...felter,
         }),
       });
