@@ -156,10 +156,12 @@ export async function sendKontakt(
       }
     }
   } catch (e) {
-    console.error("KONTAKTFORMULAR: fejl ved afsendelse:", e);
+    const grund = e instanceof Error ? e.message : String(e);
+    console.error("KONTAKTFORMULAR: fejl ved afsendelse:", grund);
     return {
       ok: false,
-      besked: `Der opstod en fejl. Ring venligst til os på ${virksomhed.telefon.visning} eller skriv til ${byggEmail()}.`,
+      // Midlertidig diagnose — grunden vises, så vi kan fejlfinde.
+      besked: `Der opstod en fejl. Ring venligst til os på ${virksomhed.telefon.visning} eller skriv til ${byggEmail()}. [diagnose: ${grund}]`,
     };
   }
 
