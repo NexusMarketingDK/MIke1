@@ -110,6 +110,17 @@ export function Sidefod() {
             © {aar} {virksomhed.navn}. Alle rettigheder forbeholdes.
           </p>
           <p>Autoriseret vagtselskab · Døgnvagt · Tillid · Tryghed</p>
+          <p>
+            Made by{" "}
+            <a
+              href="https://magnoramarketing.dk/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-staal-lys transition-colors hover:text-accent"
+            >
+              magnoramarketing.dk
+            </a>
+          </p>
         </div>
       </div>
     </footer>
